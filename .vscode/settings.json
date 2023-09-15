@@ -1,0 +1,5 @@
+{
+    "cmake.cmakePath": "C:/toolchain/cmake/v3.26.1/bin/cmake.exe",
+    "cmakeFormat.exePath": "C:/toolchain/cmake-format/v0.6.13/cmake-format.exe",
+    "clang-format.executable": "C:/toolchain/clang-format/v16.0.0/clang-format.exe",
+}

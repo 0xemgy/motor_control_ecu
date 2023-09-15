@@ -1,0 +1,83 @@
+{
+    "version": 3,
+    "configurePresets": [
+        {
+            "name": "arm_gcc_base",
+            "displayName": "arm_gcc_base",
+            "generator": "Ninja",
+            "binaryDir": "./build/${presetName}",
+            "toolchainFile": "./arm_gcc_toolchain.cmake",
+            "cacheVariables": {
+                "CMAKE_MAKE_PROGRAM": "C:/toolchain/ninja/v1.11.1/ninja.exe"
+            },
+            "hidden": true
+        },
+        {
+            "name": "mingw_base",
+            "displayName": "mingw_base",
+            "generator": "Ninja",
+            "binaryDir": "./build/${presetName}",
+            "toolchainFile": "./mingw_toolchain.cmake",
+            "cacheVariables": {
+                "CMAKE_MAKE_PROGRAM": "C:/toolchain/ninja/v1.11.1/ninja.exe"
+            },
+            "hidden": true
+        },
+        {
+            "name": "debug",
+            "displayName": "debug",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug"
+            },
+            "inherits": [
+                "arm_gcc_base"
+            ]
+        },
+        {
+            "name": "release",
+            "displayName": "release",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release"
+            },
+            "inherits": [
+                "arm_gcc_base"
+            ]
+        },
+        {
+            "name": "test",
+            "displayName": "test",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release"
+            },
+            "inherits": [
+                "mingw_base"
+            ]
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "debug",
+            "configurePreset": "debug",
+            "targets": [
+                "motor_control_ecu"
+            ]
+        },
+        {
+            "name": "release",
+            "configurePreset": "release",
+            "targets": [
+                "motor_control_ecu"
+            ]
+        },
+        {
+            "name": "test",
+            "configurePreset": "test"
+        }
+    ],
+    "testPresets": [
+    {
+      "name": "test",
+      "configurePreset": "test"
+    }
+  ]
+}
