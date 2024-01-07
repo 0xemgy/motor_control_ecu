@@ -6,7 +6,7 @@
             "cmakeExecutable": "${sourceDir}/tools/cmake/bin/cmake.exe",
             "generator": "Ninja",
             "binaryDir": "${sourceDir}/build/${presetName}",
-            "toolchainFile": "${sourceDir}/cmake/arm-gcc-toolchain.cmake",
+            "toolchainFile": "${sourceDir}/cmake/arm_gcc_toolchain.cmake",
             "cacheVariables": {
                 "CMAKE_MAKE_PROGRAM": "${sourceDir}/tools/ninja/ninja.exe"
             },

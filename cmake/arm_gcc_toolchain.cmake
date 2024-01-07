@@ -3,7 +3,7 @@ set(CMAKE_SYSTEM_PROCESSOR ARM)
 
 set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
 
-set(TOOLCHAIN_PATH "${PROJECT_SOURCE_DIR}/tools/arm-gnu-toolchain/bin")
+set(TOOLCHAIN_PATH "${PROJECT_SOURCE_DIR}/tools/arm_gnu_toolchain/bin")
 set(TOOLCHAIN_PREFIX ${TOOLCHAIN_PATH}/arm-none-eabi-)
 
 set(CMAKE_C_COMPILER    ${TOOLCHAIN_PREFIX}gcc.exe)

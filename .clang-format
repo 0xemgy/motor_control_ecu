@@ -56,7 +56,7 @@ Language: Cpp
 Standard: Cpp11
 
 # Pointer and reference alignment style. Possible values: Left, Right, Middle.
-PointerAlignment: Left
+PointerAlignment: Right
 
 # AccessModifierOffset (int)
 # The extra indent or outdent of access modifiers, e.g. public:.
@@ -94,7 +94,7 @@ AlignEscapedNewlinesLeft: true
 # Specifically, this aligns operands of a single expression that needs to be split over multiple lines, e.g.:
 # int aaa = bbbbbbbbbbbbbbb +
 #           ccccccccccccccc;
-AlignOperands: false
+AlignOperands: true
 
 # AlignTrailingComments (bool)
 # If true, aligns trailing comments.
@@ -110,7 +110,7 @@ AllowShortBlocksOnASingleLine: false
 
 # AllowShortCaseLabelsOnASingleLine (bool)
 # If true, short case labels will be contracted to a single line.
-AllowShortCaseLabelsOnASingleLine: true
+AllowShortCaseLabelsOnASingleLine: false
 
 # AllowShortFunctionsOnASingleLine (ShortFunctionStyle)
 # Dependent on the value, int f() { return 0; } can be put on a single line.
@@ -140,7 +140,7 @@ AlwaysBreakTemplateDeclarations: false
 
 # BinPackArguments (bool)
 # If false, a function call’s arguments will either be all on the same line or will have one line each.
-#BinPackArguments: false
+BinPackArguments: false
 
 # BinPackParameters (bool)
 # If false, a function declaration’s or function definition’s parameters will either all be on the same line or will have one line each.
@@ -163,10 +163,6 @@ BinPackParameters: false
 #   bool IndentBraces Indent the wrapped braces themselves.
 #BraceWrapping:
 
-# BreakAfterJavaFieldAnnotations (bool)
-# Break after each annotation on a field in Java files.
-#BreakAfterJavaFieldAnnotations:
-
 # BreakBeforeBinaryOperators (BinaryOperatorStyle)
 # The way to wrap binary operators.
 # Possible values:
@@ -186,7 +182,7 @@ BreakBeforeBinaryOperators: false
 #   BS_GNU (in configuration: GNU) Always break before braces and add an extra level of indentation to braces of control statements, not to those of class, function or other definitions.
 #   BS_WebKit (in configuration: WebKit) Like Attach, but break before functions.
 #   BS_Custom (in configuration: Custom) Configure each individual brace in BraceWrapping.
-BreakBeforeBraces: Attach
+BreakBeforeBraces: Allman
 
 # BreakBeforeTernaryOperators (bool)
 # If true, ternary operators will be placed after line breaks.
@@ -292,7 +288,7 @@ IndentFunctionDeclarationAfterType: false
 
 # MaxEmptyLinesToKeep (unsigned)
 # The maximum number of consecutive empty lines to keep.
-MaxEmptyLinesToKeep: 2
+MaxEmptyLinesToKeep: 1
 
 # NamespaceIndentation (NamespaceIndentationKind)
 # The indentation used for namespaces.
@@ -301,18 +297,6 @@ MaxEmptyLinesToKeep: 2
 #   NI_Inner (in configuration: Inner) Indent only in inner namespaces (nested in other namespaces).
 #   NI_All (in configuration: All) Indent in all namespaces.
 NamespaceIndentation: None
-
-# ObjCBlockIndentWidth (unsigned)
-# The number of characters to use for indentation of ObjC blocks.
-#ObjCBlockIndentWidth:
-
-# ObjCSpaceAfterProperty (bool)
-# Add a space after @property in Objective-C, i.e. use @property (readonly) instead of @property(readonly).
-ObjCSpaceAfterProperty: true
-
-# ObjCSpaceBeforeProtocolList (bool)
-# Add a space in front of an Objective-C protocol list, i.e. use Foo <Protocol> instead of Foo<Protocol>.
-ObjCSpaceBeforeProtocolList: true
 
 # PenaltyBreakBeforeFirstCallParameter (unsigned)
 # The penalty for breaking a function call after call(.
@@ -352,7 +336,7 @@ PenaltyReturnTypeOnItsOwnLine: 20
 
 # SortIncludes (bool)
 # If true, clang-format will sort #includes.
-#SortIncludes: false (from v3.9)
+SortIncludes: true
 
 # SpaceAfterCStyleCast (bool)
 # If true, a space may be inserted after C style casts.
@@ -368,7 +352,7 @@ SpaceBeforeAssignmentOperators: true
 #   SBPO_Never (in configuration: Never) Never put a space before opening parentheses.
 #   SBPO_ControlStatements (in configuration: ControlStatements) Put a space before opening parentheses only after control statement keywords (for/if/while...).
 #   SBPO_Always (in configuration: Always) Always put a space before opening parentheses, except when it’s prohibited by the syntax rules (in function-like macro definitions) or when determined by other style rules (after unary operators, opening parentheses, etc.)
-SpaceBeforeParens: Always
+SpaceBeforeParens: ControlStatements
 
 # SpaceInEmptyParentheses (bool)
 # If true, spaces may be inserted into ().
@@ -398,3 +382,6 @@ SpacesInParentheses: false
 # SpacesInSquareBrackets (bool)
 # If true, spaces will be inserted after [ and before ].
 SpacesInSquareBrackets: false
+
+AlignArrayOfStructures: Left
+AlignConsecutiveDeclarations: true
