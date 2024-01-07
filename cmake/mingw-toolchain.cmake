@@ -3,7 +3,7 @@ set(CMAKE_SYSTEM_PROCESSOR x86_64)
 
 set(CMAKE_TRY_COMPILE_TARGET_TYPE EXECUTABLE)
 
-set(TOOLCHAIN_PATH "C:/toolchain/mingw/i686-13.1.0-release-win32-dwarf-ucrt-rt_v11-rev1/bin")
+set(TOOLCHAIN_PATH "${PROJECT_SOURCE_DIR}/tools/mingw/bin")
 set(TOOLCHAIN_PREFIX ${TOOLCHAIN_PATH}/i686-w64-mingw32-)
 
 set(CMAKE_C_COMPILER    ${TOOLCHAIN_PREFIX}gcc.exe)

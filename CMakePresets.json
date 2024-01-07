@@ -2,82 +2,68 @@
     "version": 3,
     "configurePresets": [
         {
-            "name": "arm_gcc_base",
-            "displayName": "arm_gcc_base",
+            "name": "base",
+            "cmakeExecutable": "${sourceDir}/tools/cmake/bin/cmake.exe",
             "generator": "Ninja",
-            "binaryDir": "./build/${presetName}",
-            "toolchainFile": "./arm_gcc_toolchain.cmake",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "toolchainFile": "${sourceDir}/cmake/arm-gcc-toolchain.cmake",
             "cacheVariables": {
-                "CMAKE_MAKE_PROGRAM": "C:/toolchain/ninja/v1.11.1/ninja.exe"
-            },
-            "hidden": true
-        },
-        {
-            "name": "mingw_base",
-            "displayName": "mingw_base",
-            "generator": "Ninja",
-            "binaryDir": "./build/${presetName}",
-            "toolchainFile": "./mingw_toolchain.cmake",
-            "cacheVariables": {
-                "CMAKE_MAKE_PROGRAM": "C:/toolchain/ninja/v1.11.1/ninja.exe"
+                "CMAKE_MAKE_PROGRAM": "${sourceDir}/tools/ninja/ninja.exe"
             },
             "hidden": true
         },
         {
             "name": "debug",
-            "displayName": "debug",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug"
             },
             "inherits": [
-                "arm_gcc_base"
+                "base"
             ]
         },
         {
             "name": "release",
-            "displayName": "release",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Release"
             },
             "inherits": [
-                "arm_gcc_base"
+                "base"
             ]
         },
         {
-            "name": "test",
-            "displayName": "test",
-            "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Release"
-            },
-            "inherits": [
-                "mingw_base"
-            ]
+            "name": "analyze"
+        },
+        {
+            "name": "test"
         }
     ],
     "buildPresets": [
         {
+            "name": "base",
+            "targets": [
+                "app"
+            ],
+            "hidden": true
+        },
+        {
             "name": "debug",
             "configurePreset": "debug",
-            "targets": [
-                "motor_control_ecu"
+            "inherits": [
+                "base"
             ]
         },
         {
             "name": "release",
             "configurePreset": "release",
-            "targets": [
-                "motor_control_ecu"
+            "inherits": [
+                "base"
             ]
-        },
+        }
+    ],
+    "testPresets": [
         {
             "name": "test",
             "configurePreset": "test"
         }
-    ],
-    "testPresets": [
-    {
-      "name": "test",
-      "configurePreset": "test"
-    }
-  ]
+    ]
 }
