@@ -1,0 +1,53 @@
+/**
+ * @file version.c
+ * @author 0xemgy (0xemgy@gmail.com)
+ * @brief See version.h
+ *
+ * @copyright Copyright (c) 2024 0xemgy
+ */
+
+// Local Includes ------------------------------------------------------------------------------------------------------
+
+#include "version.h"
+
+#include <stdbool.h>
+#include <stdint.h>
+
+// Local Defines -------------------------------------------------------------------------------------------------------
+// Local Function Prototypes -------------------------------------------------------------------------------------------
+// Local Data Types ----------------------------------------------------------------------------------------------------
+// Local Variables -----------------------------------------------------------------------------------------------------
+
+static const version_t version =
+{
+    .project_name = "@PROJECT_NAME@",
+    .sw_version =
+    {
+        .major = (uint8_t)0x@PROJECT_VERSION_MAJOR_BCD@,
+        .minor = (uint8_t)0x@PROJECT_VERSION_MINOR_BCD@,
+        .patch = (uint8_t)0x@PROJECT_VERSION_PATCH_BCD@,
+    },
+    .build_info =
+    {
+        .timestamp  =
+        {
+            .year   = (uint8_t)0x@BUILD_TIMESTAMP_YEAR_BCD@,
+            .month  = (uint8_t)0x@BUILD_TIMESTAMP_MONTH_BCD@,
+            .day    = (uint8_t)0x@BUILD_TIMESTAMP_DAY_BCD@,
+            .hour   = (uint8_t)0x@BUILD_TIMESTAMP_HOUR_BCD@,
+            .minute = (uint8_t)0x@BUILD_TIMESTAMP_MINUTE_BCD@,
+            .second = (uint8_t)0x@BUILD_TIMESTAMP_SECOND_BCD@,
+        },
+        .type               = @BUILD_TYPE@,
+        .optimization_level = @OPTIMIZATION_LEVEL@,
+    },
+    .git_info =
+    {
+        .short_sha  = "@GIT_SHORT_SHA@",
+        .is_dirty   = @GIT_REPO_DIRTY_FLAG@,
+    },
+};
+
+// Global Variables ----------------------------------------------------------------------------------------------------
+// Local Functions -----------------------------------------------------------------------------------------------------
+// Global Functions ----------------------------------------------------------------------------------------------------

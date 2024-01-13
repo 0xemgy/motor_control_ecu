@@ -1,7 +1,9 @@
-#include <stdint.h>
 
 #include "util.h"
 #include "util_mem.h"
+
+#include <stdint.h>
+#include <string.h>
 
 int main(void)
 {
@@ -34,6 +36,7 @@ void unused_test_func(void)
   // src[4] = 4;
 
   util_mem_memcpy32(dst, src, UTIL_LEN(src));
+  memcpy(dst, src, UTIL_LEN(src));
 
   return;
 }

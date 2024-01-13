@@ -14,3 +14,5 @@ set(CMAKE_SIZE_UTIL     ${TOOLCHAIN_PREFIX}size.exe)
 set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
 set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
 set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
+
+# Compiler Settings ----------------------------------------------------------------------------------------------------

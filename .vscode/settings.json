@@ -1,4 +1,8 @@
 {
     "clang-format.executable": "C:/toolchain/clang_format/v16.0.0/clang-format.exe",
     "cmakeFormat.exePath": "C:/toolchain/cmake_format/v0.6.13/cmake-format.exe",
+    "files.associations": {
+        "*.h": "c",
+        "chrono": "cpp"
+    },
 }
