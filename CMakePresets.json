@@ -6,10 +6,17 @@
             "cmakeExecutable": "${sourceDir}/tools/cmake/bin/cmake.exe",
             "generator": "Ninja",
             "binaryDir": "${sourceDir}/build/${presetName}",
-            "toolchainFile": "${sourceDir}/cmake/arm_gcc_toolchain.cmake",
             "cacheVariables": {
                 "CMAKE_MAKE_PROGRAM": "${sourceDir}/tools/ninja/ninja.exe"
             },
+            "hidden": true
+        },
+        {
+            "name": "arm_base",
+            "toolchainFile": "${sourceDir}/cmake/arm_gcc_toolchain.cmake",
+            "inherits": [
+                "base"
+            ],
             "hidden": true
         },
         {
@@ -18,7 +25,7 @@
                 "CMAKE_BUILD_TYPE": "Debug"
             },
             "inherits": [
-                "base"
+                "arm_base"
             ]
         },
         {
@@ -27,7 +34,16 @@
                 "CMAKE_BUILD_TYPE": "Release"
             },
             "inherits": [
-                "base"
+                "arm_base"
+            ]
+        },
+        {
+            "name": "lizard",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release"
+            },
+            "inherits": [
+                "arm_base"
             ]
         },
         {
@@ -57,6 +73,13 @@
             "configurePreset": "release",
             "inherits": [
                 "base"
+            ]
+        },
+        {
+            "name": "lizard",
+            "configurePreset": "lizard",
+            "targets": [
+                "lizard"
             ]
         }
     ],
