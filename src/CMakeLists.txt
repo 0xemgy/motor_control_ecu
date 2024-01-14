@@ -25,4 +25,5 @@ add_subdirectory(app)
 add_subdirectory(bsw)
 
 include(${CMAKE_SOURCE_DIR}/cmake/arm_gcc_build.cmake)
+include(${CMAKE_SOURCE_DIR}/cmake/cppcheck.cmake)
 include(${CMAKE_SOURCE_DIR}/cmake/lizard.cmake)

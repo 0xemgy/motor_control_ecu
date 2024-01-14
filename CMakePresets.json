@@ -38,6 +38,15 @@
             ]
         },
         {
+            "name": "cppcheck",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release"
+            },
+            "inherits": [
+                "arm_base"
+            ]
+        },
+        {
             "name": "lizard",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Release"
@@ -73,6 +82,13 @@
             "configurePreset": "release",
             "inherits": [
                 "base"
+            ]
+        },
+        {
+            "name": "cppcheck",
+            "configurePreset": "cppcheck",
+            "targets": [
+                "cppcheck"
             ]
         },
         {
