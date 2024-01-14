@@ -19,7 +19,7 @@
 
 // Global Defines ------------------------------------------------------------------------------------------------------
 
-#define VERSION_PROJECT_NAME_MAX_LEN ((uint32_t)32)
+#define VERSION_PROJECT_NAME_MAX_LEN   ((uint32_t)32)
 #define VERSION_GIT_INFO_SHORT_SHA_LEN ((uint32_t)7)
 
 // Global Data Types ---------------------------------------------------------------------------------------------------
@@ -47,8 +47,8 @@ typedef enum version_optimization_level
 
 typedef struct version_build_info
 {
-    util_timestamp_bcd_t timestamp;
-    version_build_type_t type;
+    util_timestamp_bcd_t         timestamp;
+    version_build_type_t         type;
     version_optimization_level_t optimization_level;
 } version_build_info_t;
 
@@ -67,6 +67,9 @@ typedef struct version
 } version_t;
 
 // Global Variables ----------------------------------------------------------------------------------------------------
+
+extern const version_t version;
+
 // Global Functions ----------------------------------------------------------------------------------------------------
 
 #endif

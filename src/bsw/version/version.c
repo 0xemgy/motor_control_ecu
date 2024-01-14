@@ -10,44 +10,43 @@
 
 #include "version.h"
 
-#include <stdbool.h>
-#include <stdint.h>
+#include "version_config.h"
 
 // Local Defines -------------------------------------------------------------------------------------------------------
 // Local Function Prototypes -------------------------------------------------------------------------------------------
 // Local Data Types ----------------------------------------------------------------------------------------------------
 // Local Variables -----------------------------------------------------------------------------------------------------
+// Global Variables ----------------------------------------------------------------------------------------------------
 
-static const version_t version =
+const version_t version __attribute__((section(".version"))) =
 {
-    .project_name = "@PROJECT_NAME@",
+    .project_name = VERSION_CONFIG_PROJECT_NAME,
     .sw_version =
     {
-        .major = (uint8_t)0x@PROJECT_VERSION_MAJOR_BCD@,
-        .minor = (uint8_t)0x@PROJECT_VERSION_MINOR_BCD@,
-        .patch = (uint8_t)0x@PROJECT_VERSION_PATCH_BCD@,
+        .major = VERSION_CONFIG_SW_VERSION_MAJOR,
+        .minor = VERSION_CONFIG_SW_VERSION_MINOR,
+        .patch = VERSION_CONFIG_SW_VERSION_PATCH,
     },
     .build_info =
     {
         .timestamp  =
         {
-            .year   = (uint8_t)0x@BUILD_TIMESTAMP_YEAR_BCD@,
-            .month  = (uint8_t)0x@BUILD_TIMESTAMP_MONTH_BCD@,
-            .day    = (uint8_t)0x@BUILD_TIMESTAMP_DAY_BCD@,
-            .hour   = (uint8_t)0x@BUILD_TIMESTAMP_HOUR_BCD@,
-            .minute = (uint8_t)0x@BUILD_TIMESTAMP_MINUTE_BCD@,
-            .second = (uint8_t)0x@BUILD_TIMESTAMP_SECOND_BCD@,
+            .year   = VERSION_CONFIG_BUILD_INFO_TIMESTAMP_YEAR,
+            .month  = VERSION_CONFIG_BUILD_INFO_TIMESTAMP_MONTH,
+            .day    = VERSION_CONFIG_BUILD_INFO_TIMESTAMP_DAY,
+            .hour   = VERSION_CONFIG_BUILD_INFO_TIMESTAMP_HOUR,
+            .minute = VERSION_CONFIG_BUILD_INFO_TIMESTAMP_MINUTE,
+            .second = VERSION_CONFIG_BUILD_INFO_TIMESTAMP_SECOND,
         },
-        .type               = @BUILD_TYPE@,
-        .optimization_level = @OPTIMIZATION_LEVEL@,
+        .type               = VERSION_CONFIG_BUILD_INFO_TYPE,
+        .optimization_level = VERSION_CONFIG_BUILD_INFO_OPTIMIZATION_LEVEL,
     },
     .git_info =
     {
-        .short_sha  = "@GIT_SHORT_SHA@",
-        .is_dirty   = @GIT_REPO_DIRTY_FLAG@,
+        .short_sha  = VERSION_CONFIG_GIT_INFO_SHORT_SHA,
+        .is_dirty   = VERSION_CONFIG_GIT_INFO_IS_DIRTY,
     },
 };
 
-// Global Variables ----------------------------------------------------------------------------------------------------
 // Local Functions -----------------------------------------------------------------------------------------------------
 // Global Functions ----------------------------------------------------------------------------------------------------

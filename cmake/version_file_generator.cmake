@@ -78,5 +78,5 @@ else()
 endif()
 
 # Automatic File Generation --------------------------------------------------------------------------------------------
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/bsw/version/version.c.in version.c @ONLY)
-execute_process(COMMAND attrib +R ${CMAKE_CURRENT_BINARY_DIR}\\version.c)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/bsw/version/version_config.h.in version_config.h @ONLY)
+# execute_process(COMMAND attrib +R ${CMAKE_CURRENT_BINARY_DIR}\\version_config.h)

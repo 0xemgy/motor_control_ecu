@@ -59,6 +59,13 @@ SECTIONS
     . = ALIGN(4);
   } >FLASH
 
+  .version :
+  {
+    . = ALIGN(8);
+    KEEP(*(.version))
+    . = ALIGN(8);
+  } >FLASH
+
   /* The program code and other data into "FLASH" Rom type memory */
   .text :
   {
@@ -128,9 +135,9 @@ SECTIONS
   /* Remove information from the compiler libraries */
   /DISCARD/ :
   {
-    libc.a ( * )
-    libm.a ( * )
-    libgcc.a ( * )
+    libc.a
+    libm.a
+    libgcc.a
   }
 
   .ARM.attributes 0 : { *(.ARM.attributes) }

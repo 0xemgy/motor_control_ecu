@@ -10,8 +10,7 @@ set_target_properties(${EXECUTABLE} PROPERTIES OUTPUT_NAME ${PROJECT_NAME})
 
 target_compile_options(
   ${EXECUTABLE}
-  PRIVATE
-  # cmake-format: off
+  PRIVATE # cmake-format: off
 
   # Target Configuration
   -mcpu=cortex-m4               # Specify the target CPU
@@ -93,21 +92,19 @@ target_link_options(
   # cmake-format: on
 )
 
-# Version File Generation ----------------------------------------------------------------------------------------------
-
-include(${CMAKE_SOURCE_DIR}/cmake/version_file_generator.cmake)
-
 # Post Build Commands---------------------------------------------------------------------------------------------------
 
 # Print executable size
 add_custom_command(TARGET ${EXECUTABLE} POST_BUILD COMMAND ${CMAKE_SIZE_UTIL} ${PROJECT_NAME}.elf)
 
-# Create bin and hex files
+# Create bin file
 add_custom_command(
-  TARGET ${EXECUTABLE}
-  POST_BUILD
-  COMMAND ${CMAKE_OBJCOPY} -O binary ${PROJECT_NAME}.elf ${PROJECT_NAME}.bin
-  COMMAND ${CMAKE_OBJCOPY} -O ihex ${PROJECT_NAME}.elf ${PROJECT_NAME}.hex
+  TARGET ${EXECUTABLE} POST_BUILD COMMAND ${CMAKE_OBJCOPY} -O binary ${PROJECT_NAME}.elf ${PROJECT_NAME}.bin
+)
+
+# Create hex file
+add_custom_command(
+  TARGET ${EXECUTABLE} POST_BUILD COMMAND ${CMAKE_OBJCOPY} -O ihex ${PROJECT_NAME}.elf ${PROJECT_NAME}.hex
 )
 
 # Clean Command --------------------------------------------------------------------------------------------------------
@@ -119,3 +116,14 @@ set_target_properties(
     ADDITIONAL_CLEAN_FILES
     "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.bin;${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.hex;${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.map"
 )
+
+# Version File Generation ----------------------------------------------------------------------------------------------
+
+include(${CMAKE_SOURCE_DIR}/cmake/version_file_generator.cmake)
+
+# add_custom_target(version_file_generator
+#     COMMAND ${CMAKE_COMMAND} -P ${CMAKE_SOURCE_DIR}/cmake/version_file_generator.cmake
+#     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+# )
+
+# add_dependencies(${EXECUTABLE} version_file_generator)
