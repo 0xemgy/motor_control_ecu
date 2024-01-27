@@ -17,7 +17,7 @@ int main(void)
         val = 4;
     }
 
-    unused_test_func(); // 3.2 non-compliant comment ends with backslash \
+    unused_test_func(); // 3.2 non-compliant comment ends with backslash
 
     while (1)
     {

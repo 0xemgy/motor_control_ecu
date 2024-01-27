@@ -6,6 +6,8 @@ set(SOURCES
     bsw/interrupt_vector_table.s
     bsw/main.c
     bsw/startup.s
+    bsw/debouncer/debouncer.c
+    bsw/timeout/timeout.c
     bsw/util/util.c
     bsw/util/util_mem.c
     bsw/version/version.c
@@ -14,11 +16,13 @@ set(SOURCES
 set(INCLUDES
     ${CMAKE_CURRENT_BINARY_DIR}
     bsw
+    bsw/config
+    bsw/debouncer
+    bsw/timeout
+    bsw/util
     bsw/vendor
     bsw/vendor/cmsis
     bsw/version
-    bsw/config
-    bsw/util
 )
 
 add_subdirectory(app)
