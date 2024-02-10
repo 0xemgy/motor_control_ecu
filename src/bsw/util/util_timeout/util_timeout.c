@@ -8,7 +8,7 @@
 
 // Local Includes ------------------------------------------------------------------------------------------------------
 
-#include "timeout.h"
+#include "util_timeout.h"
 
 // Local Defines -------------------------------------------------------------------------------------------------------
 // Local Function Prototypes -------------------------------------------------------------------------------------------
@@ -18,16 +18,16 @@
 // Local Functions -----------------------------------------------------------------------------------------------------
 // Global Functions ----------------------------------------------------------------------------------------------------
 
-void timeout_init(timeout_t *me, const timeout_config_t *config)
+void util_timeout_init(util_timeout_t *me, const util_timeout_config_t *config)
 {
     me->config = config;
 
     me->timer = me->config->t_timeout;
 }
 
-void timeout_run(timeout_t *me)
+void util_timeout_run(util_timeout_t *me)
 {
-    if(me->timer >= me->config->t_run_cycle)
+    if (me->timer >= me->config->t_run_cycle)
     {
         me->timer -= me->config->t_run_cycle;
     }
@@ -37,12 +37,12 @@ void timeout_run(timeout_t *me)
     }
 }
 
-void timeout_restart(timeout_t *me)
+void util_timeout_restart(util_timeout_t *me)
 {
     me->timer = me->config->t_timeout;
 }
 
-bool timeout_is_timeout(const timeout_t *me)
+bool util_timeout_is_timeout(const util_timeout_t *me)
 {
     return (me->timer == (uint32_t)0);
 }

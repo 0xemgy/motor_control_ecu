@@ -1,14 +1,14 @@
 /**
- * @file debouncer.c
+ * @file util_debouncer.c
  * @author 0xemgy (0xemgy@gmail.com)
- * @brief See debouncer.h
+ * @brief See util_debouncer.h
  *
  * @copyright Copyright (c) 2024 0xemgy
  */
 
 // Local Includes ------------------------------------------------------------------------------------------------------
 
-#include "debouncer.h"
+#include "util_debouncer.h"
 
 // Local Defines -------------------------------------------------------------------------------------------------------
 // Local Function Prototypes -------------------------------------------------------------------------------------------
@@ -18,16 +18,16 @@
 // Local Functions -----------------------------------------------------------------------------------------------------
 // Global Functions ----------------------------------------------------------------------------------------------------
 
-void debouncer_init(debouncer_t *me, const debouncer_config_t *config)
+void util_debouncer_init(util_debouncer_t *me, const util_debouncer_config_t *config)
 {
     me->config = config;
 
     me->state = me->config->initial_state;
 
-    timeout_init(&me->timeout, &me->config->timeout_config);
+    util_timeout_init(&me->timeout, &me->config->timeout_config);
 }
 
-void debouncer_run(debouncer_t *me)
+void util_debouncer_run(util_debouncer_t *me)
 {
     bool input;
 
@@ -40,34 +40,34 @@ void debouncer_run(debouncer_t *me)
         input = me->config->get_input.functions.get_by_handle.get(me->config->get_input.functions.get_by_handle.handle);
     }
 
-    timeout_run(&me->timeout);
+    util_timeout_run(&me->timeout);
 
     switch (me->state)
     {
-    case DEBOUNCER_STATE_FALSE:
+    case UTIL_DEBOUNCER_STATE_FALSE:
         if (!input)
         {
-            timeout_restart(&me->timeout);
+            util_timeout_restart(&me->timeout);
         }
         else
         {
-            if (timeout_is_timeout(&me->timeout))
+            if (util_timeout_is_timeout(&me->timeout))
             {
-                me->state = DEBOUNCER_STATE_TRUE;
+                me->state = UTIL_DEBOUNCER_STATE_TRUE;
             }
         }
 
         break;
-    case DEBOUNCER_STATE_TRUE:
+    case UTIL_DEBOUNCER_STATE_TRUE:
         if (input)
         {
-            timeout_restart(&me->timeout);
+            util_timeout_restart(&me->timeout);
         }
         else
         {
-            if (timeout_is_timeout(&me->timeout))
+            if (util_timeout_is_timeout(&me->timeout))
             {
-                me->state = DEBOUNCER_STATE_FALSE;
+                me->state = UTIL_DEBOUNCER_STATE_FALSE;
             }
         }
         break;
@@ -77,7 +77,7 @@ void debouncer_run(debouncer_t *me)
     }
 }
 
-debouncer_state_t debouncer_get_state(const debouncer_t *me)
+util_debouncer_state_t util_debouncer_get_state(const util_debouncer_t *me)
 {
     return me->state;
 }

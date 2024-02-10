@@ -36,68 +36,9 @@
             "inherits": [
                 "arm_base"
             ]
-        },
-        {
-            "name": "cppcheck",
-            "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Release"
-            },
-            "inherits": [
-                "arm_base"
-            ]
-        },
-        {
-            "name": "lizard",
-            "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Release"
-            },
-            "inherits": [
-                "arm_base"
-            ]
-        },
-        {
-            "name": "analyze"
-        },
-        {
-            "name": "test"
         }
     ],
     "buildPresets": [
-        {
-            "name": "base",
-            "targets": [
-                "app"
-            ],
-            "hidden": true
-        },
-        {
-            "name": "debug",
-            "configurePreset": "debug",
-            "inherits": [
-                "base"
-            ]
-        },
-        {
-            "name": "release",
-            "configurePreset": "release",
-            "inherits": [
-                "base"
-            ]
-        },
-        {
-            "name": "cppcheck",
-            "configurePreset": "cppcheck",
-            "targets": [
-                "cppcheck"
-            ]
-        },
-        {
-            "name": "lizard",
-            "configurePreset": "lizard",
-            "targets": [
-                "lizard"
-            ]
-        }
     ],
     "testPresets": [
         {

@@ -6,10 +6,10 @@ set(SOURCES
     bsw/interrupt_vector_table.s
     bsw/main.c
     bsw/startup.s
-    bsw/debouncer/debouncer.c
-    bsw/timeout/timeout.c
-    bsw/util/util.c
-    bsw/util/util_mem.c
+    bsw/util/util_debouncer/util_debouncer.c
+    bsw/util/util_mem/util_mem.c
+    bsw/util/util_timeout/util_timeout.c
+    bsw/util/util/util.c
     bsw/version/version.c
 )
 
@@ -17,9 +17,17 @@ set(INCLUDES
     ${CMAKE_CURRENT_BINARY_DIR}
     bsw
     bsw/config
-    bsw/debouncer
-    bsw/timeout
     bsw/util
+    bsw/util/util
+    bsw/util/util_debouncer
+    bsw/util/util_estimator
+    bsw/util/util_getter
+    bsw/util/util_mem
+    bsw/util/util_moving_averager
+    bsw/util/util_scaler
+    bsw/util/util_semver
+    bsw/util/util_timeout
+    bsw/util/util_timestamp
     bsw/vendor
     bsw/vendor/cmsis
     bsw/version
