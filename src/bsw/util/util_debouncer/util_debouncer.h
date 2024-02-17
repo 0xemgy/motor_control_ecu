@@ -11,8 +11,8 @@
 
 // Global Includes -----------------------------------------------------------------------------------------------------
 
-#include "util_timeout.h"
 #include "util_getter.h"
+#include "util_timeout.h"
 
 #include <stdbool.h>
 #include <stdint.h>
@@ -40,6 +40,7 @@ typedef struct util_debouncer
 {
     const util_debouncer_config_t *config;
     util_debouncer_state_t         state;
+    bool                           input;
     util_timeout_t                 timeout;
 } util_debouncer_t;
 

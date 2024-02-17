@@ -12,40 +12,33 @@
 
 // Local Defines -------------------------------------------------------------------------------------------------------
 // Local Function Prototypes -------------------------------------------------------------------------------------------
+
+static void util_debouncer_refresh_input(util_debouncer_t *me);
+static void util_debouncer_fsm_run(util_debouncer_t *me);
+
 // Local Data Types ----------------------------------------------------------------------------------------------------
 // Local Variables -----------------------------------------------------------------------------------------------------
 // Global Variables ----------------------------------------------------------------------------------------------------
 // Local Functions -----------------------------------------------------------------------------------------------------
-// Global Functions ----------------------------------------------------------------------------------------------------
 
-void util_debouncer_init(util_debouncer_t *me, const util_debouncer_config_t *config)
+static void util_debouncer_refresh_input(util_debouncer_t *me)
 {
-    me->config = config;
-
-    me->state = me->config->initial_state;
-
-    util_timeout_init(&me->timeout, &me->config->timeout_config);
-}
-
-void util_debouncer_run(util_debouncer_t *me)
-{
-    bool input;
-
     if (me->config->get_input.type == UTIL_GETTER_TYPE_DIRECTLY)
     {
-        input = me->config->get_input.functions.get_directly();
+        me->input = me->config->get_input.functions.get_directly();
     }
     else
     {
-        input = me->config->get_input.functions.get_by_handle.get(me->config->get_input.functions.get_by_handle.handle);
+        me->input = me->config->get_input.functions.get_by_handle.get(me->config->get_input.functions.get_by_handle.handle);
     }
+}
 
-    util_timeout_run(&me->timeout);
-
+static void util_debouncer_fsm_run(util_debouncer_t *me)
+{
     switch (me->state)
     {
     case UTIL_DEBOUNCER_STATE_FALSE:
-        if (!input)
+        if (!me->input)
         {
             util_timeout_restart(&me->timeout);
         }
@@ -59,7 +52,7 @@ void util_debouncer_run(util_debouncer_t *me)
 
         break;
     case UTIL_DEBOUNCER_STATE_TRUE:
-        if (input)
+        if (me->input)
         {
             util_timeout_restart(&me->timeout);
         }
@@ -70,11 +63,29 @@ void util_debouncer_run(util_debouncer_t *me)
                 me->state = UTIL_DEBOUNCER_STATE_FALSE;
             }
         }
-        break;
 
+        break;
     default:
         break;
     }
+}
+
+// Global Functions ----------------------------------------------------------------------------------------------------
+
+void util_debouncer_init(util_debouncer_t *me, const util_debouncer_config_t *config)
+{
+    me->config = config;
+    me->state  = me->config->initial_state;
+    me->input  = (me->config->initial_state == UTIL_DEBOUNCER_STATE_TRUE);
+
+    util_timeout_init(&me->timeout, &me->config->timeout_config);
+}
+
+void util_debouncer_run(util_debouncer_t *me)
+{
+    util_debouncer_refresh_input(me);
+    util_timeout_run(&me->timeout);
+    util_debouncer_fsm_run(me);
 }
 
 util_debouncer_state_t util_debouncer_get_state(const util_debouncer_t *me)

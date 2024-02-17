@@ -37,13 +37,5 @@
                 "arm_base"
             ]
         }
-    ],
-    "buildPresets": [
-    ],
-    "testPresets": [
-        {
-            "name": "test",
-            "configurePreset": "test"
-        }
     ]
 }

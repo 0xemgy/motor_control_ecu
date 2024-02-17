@@ -1,15 +1,3 @@
-# Get absolute paths to all source files for proper vscode PROBLEMS view file hyperlinks
-foreach(source ${SOURCES})
-  get_filename_component(abs_source ${source} ABSOLUTE)
-  list(APPEND ABSOLUTE_SOURCES ${abs_source})
-endforeach()
-
-# Get absolute paths to all include folders for proper vscode PROBLEMS view file hyperlinks
-foreach(include ${INCLUDES})
-  get_filename_component(abs_include ${include} ABSOLUTE)
-  list(APPEND ABSOLUTE_INCLUDES -I${abs_include}) # -I on each folder necessary for cppcheck to find each folder
-endforeach()
-
 add_custom_target(
   cppcheck ALL
   COMMAND
