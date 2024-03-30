@@ -5,7 +5,6 @@ add_custom_target(
     # Check settings
     --addon=./../tools/cppcheck/misra.json --check-level=exhaustive --enable=all --std=c99
     # Suppressions to avoid false positives
-    --suppress=*:*/*.s # Ignore assembler files (they can not be checked by this tool)
     --suppress=missingIncludeSystem # Avoid false positives on <stdbool.h> and <stdint.h> includes
     # Suppressions
     --suppress=unusedFunction:*util* #
@@ -17,7 +16,7 @@ add_custom_target(
     --template=gcc
     # Inlude paths and source files (absolute paths needed for proper vscode PROBLEMS view file hyperlinks)
     ${ABSOLUTE_INCLUDES}
-    ${ABSOLUTE_SOURCES}
+    ${ABSOLUTE_C_SOURCES}
   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
   COMMENT "Running cppcheck static code analysis"
 )

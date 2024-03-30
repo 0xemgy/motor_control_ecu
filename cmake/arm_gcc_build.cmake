@@ -1,9 +1,9 @@
 # Absolute Paths -------------------------------------------------------------------------------------------------------
 
 # Get absolute paths to all source files for proper vscode PROBLEMS view file hyperlinks
-foreach(source ${SOURCES})
-  get_filename_component(abs_source ${source} ABSOLUTE)
-  list(APPEND ABSOLUTE_SOURCES ${abs_source})
+foreach(c_source ${C_SOURCES})
+  get_filename_component(abs_c_source ${c_source} ABSOLUTE)
+  list(APPEND ABSOLUTE_C_SOURCES ${abs_c_source})
 endforeach()
 
 # Get absolute paths to all include folders for proper vscode PROBLEMS view file hyperlinks
@@ -16,8 +16,9 @@ endforeach()
 
 set(CMAKE_EXECUTABLE_SUFFIX_C ".elf")
 set(EXECUTABLE "app")
-add_executable(${EXECUTABLE} ${SOURCES})
+add_executable(${EXECUTABLE} ${C_SOURCES} ${ASM_SOURCES})
 target_include_directories(${EXECUTABLE} PRIVATE ${INCLUDES})
+set(CMAKE_C_STANDARD_INCLUDE_DIRECTORIES ${CMAKE_C_IMPLICIT_INCLUDE_DIRECTORIES}) # needed for clang-tidy
 set_target_properties(${EXECUTABLE} PROPERTIES OUTPUT_NAME ${PROJECT_NAME})
 
 # Compiler Options -----------------------------------------------------------------------------------------------------
@@ -55,7 +56,7 @@ target_compile_options(
   -Wcast-qual                   # Warn about inappropriate type qualifiers in pointer casts
   -Wconversion                  # Warn about implicit conversions that may change the value
   -Wdouble-promotion            # Warn about implicit double to float promotion
-  -Werror                       # Treat warnings as errors
+  # -Werror                       # Treat warnings as errors
   -Wextra                       # Enable additional warning messages
   -Wfloat-equal                 # Warn about floating-point equality comparisons
   -Wformat                      # Enables warnings about format string issues

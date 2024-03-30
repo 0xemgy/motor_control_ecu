@@ -13,7 +13,10 @@
         },
         {
             "name": "arm_base",
-            "toolchainFile": "${sourceDir}/cmake/arm_gcc_toolchain.cmake",
+            "toolchainFile": "${sourceDir}/cmake/toolchain_arm_gcc.cmake",
+            "cacheVariables": {
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+            },
             "inherits": [
                 "base"
             ],

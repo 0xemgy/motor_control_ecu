@@ -2,15 +2,23 @@ cmake_minimum_required(VERSION 3.26.1)
 
 # Source files and Include Directories----------------------------------------------------------------------------------
 
-set(SOURCES
+set(ASM_SOURCES
     bsw/interrupt_vector_table.s
-    bsw/main.c
     bsw/startup.s
+)
+
+set(C_SOURCES
+    bsw/main.c
     bsw/util/util_debouncer/util_debouncer.c
+    bsw/util/util_debouncer/util_debouncer.h
     bsw/util/util_mem/util_mem.c
+    bsw/util/util_mem/util_mem.h
     bsw/util/util_timeout/util_timeout.c
+    bsw/util/util_timeout/util_timeout.h
     bsw/util/util/util.c
+    bsw/util/util/util.h
     bsw/version/version.c
+    bsw/version/version.h
 )
 
 set(INCLUDES
@@ -37,5 +45,7 @@ add_subdirectory(app)
 add_subdirectory(bsw)
 
 include(${CMAKE_SOURCE_DIR}/cmake/arm_gcc_build.cmake)
+include(${CMAKE_SOURCE_DIR}/cmake/clang_format.cmake)
+include(${CMAKE_SOURCE_DIR}/cmake/clang_tidy.cmake)
 include(${CMAKE_SOURCE_DIR}/cmake/cppcheck.cmake)
 include(${CMAKE_SOURCE_DIR}/cmake/lizard.cmake)

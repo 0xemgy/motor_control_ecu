@@ -9,7 +9,7 @@ add_custom_target(
           --arguments 5
           -Tnloc=1000
           -Ttoken_count=500
-          ${ABSOLUTE_SOURCES}
+          ${ABSOLUTE_C_SOURCES}
 
   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
   COMMENT "Running Lizard code complexity analysis"
