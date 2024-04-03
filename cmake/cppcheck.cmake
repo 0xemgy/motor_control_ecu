@@ -6,12 +6,14 @@ add_custom_target(
     --addon=./../tools/cppcheck/misra.json --check-level=exhaustive --enable=all --std=c99
     # Suppressions to avoid false positives
     --suppress=missingIncludeSystem # Avoid false positives on <stdbool.h> and <stdint.h> includes
-    # Suppressions
+    # Suppressions for utility code
     --suppress=unusedFunction:*util* #
     --suppress=misra-c2012-19.2:*util* # The union keyword should not be used
     --suppress=misra-c2012-2.3:*util* # A project should not contain unused type declarations
     --suppress=misra-c2012-2.4:*util* # A project should not contain unused tag declarations
     --suppress=misra-c2012-2.5:*util* # A project should not contain unused macro declarations
+    # Suppression for all code
+    --suppress=misra-c2012-8.9:* # An object should be defined at block scope if its identifier only appears in a single function
     # Output format compatible to vscode PROBLEMS view
     --template=gcc
     # Inlude paths and source files (absolute paths needed for proper vscode PROBLEMS view file hyperlinks)

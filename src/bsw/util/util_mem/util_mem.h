@@ -18,7 +18,22 @@
 // Global Variables ----------------------------------------------------------------------------------------------------
 // Global Functions ----------------------------------------------------------------------------------------------------
 
+/**
+ * @brief Copy memory
+ *
+ * @param dst Destination
+ * @param src Source
+ * @param len [byte] Length
+ */
 void util_mem_memcpy32(uint32_t *dst, const uint32_t *src, uint32_t len);
+
+/**
+ * @brief Set memory
+ *
+ * @param dst Destination
+ * @param val Value
+ * @param len [byte] Length
+ */
 void util_mem_memset32(uint32_t *dst, uint32_t val, uint32_t len);
 
 #endif

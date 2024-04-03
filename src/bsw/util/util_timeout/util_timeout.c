@@ -1,7 +1,7 @@
 /**
- * @file timeout.c
+ * @file util_timeout.c
  * @author 0xemgy (0xemgy@gmail.com)
- * @brief See timeout.h
+ * @brief See util_timeout.h
  *
  * @copyright Copyright (c) 2024 0xemgy
  */

@@ -13,7 +13,18 @@
 // Local Defines -------------------------------------------------------------------------------------------------------
 // Local Function Prototypes -------------------------------------------------------------------------------------------
 
+/**
+ * @brief Refresh input
+ *
+ * @param me Module instance
+ */
 static void util_debouncer_refresh_input(util_debouncer_t *me);
+
+/**
+ * @brief Run FSM
+ *
+ * @param me Module instance
+ */
 static void util_debouncer_fsm_run(util_debouncer_t *me);
 
 // Local Data Types ----------------------------------------------------------------------------------------------------

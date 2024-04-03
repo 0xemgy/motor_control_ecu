@@ -21,6 +21,9 @@
 
 // Global Data Types ---------------------------------------------------------------------------------------------------
 
+/**
+ * @brief Module state
+ */
 typedef enum util_debouncer_state
 {
     UTIL_DEBOUNCER_STATE_FALSE,
@@ -28,27 +31,52 @@ typedef enum util_debouncer_state
     UTIL_DEBOUNCER_STATE_MAX
 } util_debouncer_state_t;
 
+/**
+ * @brief Module configuration
+ */
 typedef struct util_debouncer_config
 {
-    util_timeout_config_t  timeout_config;
-    util_debouncer_state_t initial_state;
-    util_getter_bool_t     get_input;
-    uint32_t               t_run_cycle;
+    util_timeout_config_t  timeout_config; /**< Timeout configuration */
+    util_debouncer_state_t initial_state;  /**< Initial state */
+    util_getter_bool_t     get_input;      /**< Get input function */
+    uint32_t               t_run_cycle;    /**< [ms] Run cycle */
 } util_debouncer_config_t;
 
+/**
+ * @brief Module instance
+ */
 typedef struct util_debouncer
 {
-    const util_debouncer_config_t *config;
-    util_debouncer_state_t         state;
-    bool                           input;
-    util_timeout_t                 timeout;
+    const util_debouncer_config_t *config;  /**< Configuration */
+    util_debouncer_state_t         state;   /**< State */
+    bool                           input;   /**< Input */
+    util_timeout_t                 timeout; /**< Timeout */
 } util_debouncer_t;
 
 // Global Variables ----------------------------------------------------------------------------------------------------
 // Global Functions ----------------------------------------------------------------------------------------------------
 
-void                   util_debouncer_init(util_debouncer_t *me, const util_debouncer_config_t *config);
-void                   util_debouncer_run(util_debouncer_t *me);
+/**
+ * @brief Initialize module
+ *
+ * @param me Module instance
+ * @param config Module instance configuration
+ */
+void util_debouncer_init(util_debouncer_t *me, const util_debouncer_config_t *config);
+
+/**
+ * @brief Execute module logic
+ *
+ * @param me Module instance
+ */
+void util_debouncer_run(util_debouncer_t *me);
+
+/**
+ * @brief Get module state
+ *
+ * @param me Module instance
+ * @return Module state
+ */
 util_debouncer_state_t util_debouncer_get_state(const util_debouncer_t *me);
 
 #endif

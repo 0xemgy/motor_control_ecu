@@ -10,22 +10,22 @@
 
 static void unused_test_func(uint8_t foo);
 
-typedef struct test_struct
-{
-    uint8_t dummy;
-} test_struct_t;
+// typedef struct test_struct
+// {
+//     uint8_t dummy;
+// } test_struct_t;
 
-typedef enum test_enum
-{
-    TEST_ENUM_0,
-    TEST_ENUM_1,
-    TEST_ENUM_MAX
-} test_enum_t;
+// typedef enum test_enum
+// {
+//     TEST_ENUM_0,
+//     TEST_ENUM_1,
+//     TEST_ENUM_MAX
+// } test_enum_t;
 
 #define MAGIC_NUMBER_1 ((uint8_t)255)
 #define MAGIC_NUMBER_2 ((uint8_t)0x10)
 #define MAGIC_NUMBER_3 ((uint8_t)5)
-#define MAGIC_NUMBER_4 42lu
+#define MAGIC_NUMBER_4 42LU
 
 int main(void)
 {
@@ -52,26 +52,26 @@ static const uint8_t bar = 5;
 //     *param1 = 42U;
 // }
 
-volatile const bool test_variable = false;
-static uint8_t main_foo(void);
+static volatile bool test_variable = false;
+static uint8_t       main_foo(void);
 
 static void unused_test_func(uint8_t foo)
 {
     uint32_t src[MAGIC_NUMBER_3];
-     uint32_t dst[MAGIC_NUMBER_3];
+    uint32_t dst[MAGIC_NUMBER_3];
 
     (void)bar;
-     (void)test_variable;
+    (void)test_variable;
 
-    src[0] = 0; // /* tst */
+    src[0] = 0;
     // src[1] = 1;
     // src[2] = 2;
     // src[3] = 3;
     // src[4] = 4;
 
-    if(foo == main_foo())
+    if (foo == main_foo())
     {
-        foo = 1;
+        test_variable = foo > (uint8_t)0;
     }
     (void)foo;
 

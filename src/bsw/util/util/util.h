@@ -15,8 +15,23 @@
 
 // Global Defines ------------------------------------------------------------------------------------------------------
 
-#define UTIL_LEN(x)    ((uint32_t)sizeof((x)) / (uint32_t)sizeof((x)[0]))
-#define UTIL_TO_BCD(x) ((uint8_t)(((((uint32_t)(x)) / (uint32_t)(10)) << 4) | (((uint32_t)(x)) % 10)))
+/**
+ * @brief Calculate length of an array
+ *
+ * @param X Array
+ *
+ * @return [byte] Length of array
+ */
+#define UTIL_LEN(X) ((uint32_t)sizeof((X)) / (uint32_t)sizeof((X)[0]))
+
+/**
+ * @brief Convert decimal value to BCD value
+ *
+ * @param X Decimal value
+ *
+ * @return BCD value
+ */
+#define UTIL_TO_BCD(X) ((uint8_t)(((((uint32_t)(X)) / (uint32_t)(10)) << 4) | (((uint32_t)(X)) % 10)))
 
 // Global Data Types ---------------------------------------------------------------------------------------------------
 // Global Variables ----------------------------------------------------------------------------------------------------
