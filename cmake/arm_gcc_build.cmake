@@ -29,7 +29,7 @@ target_compile_options(
 
   # Target Configuration
   -mcpu=cortex-m4               # Specify the target CPU
-  -mfloat-abi=hard              # Use hardware floating-point unit
+  -mfloat-abi=soft              # Do not use hardware floating-point unit
   -mfpu=fpv4-sp-d16             # Specify the floating-point unit type
   -mthumb                       # Generate Thumb-2 instructions
 
@@ -56,7 +56,7 @@ target_compile_options(
   -Wcast-qual                   # Warn about inappropriate type qualifiers in pointer casts
   -Wconversion                  # Warn about implicit conversions that may change the value
   -Wdouble-promotion            # Warn about implicit double to float promotion
-  # -Werror                       # Treat warnings as errors
+  # -Werror                       # Treat warnings as errors # TODO reenable when going to into development phase
   -Wextra                       # Enable additional warning messages
   -Wfloat-equal                 # Warn about floating-point equality comparisons
   -Wformat                      # Enables warnings about format string issues
@@ -73,7 +73,7 @@ target_compile_options(
   -Wunused                      # Warn about unused variables, functions, or parameters
 
   # Standard Library
-  --specs=nano.specs             # Use Newlib Nano
+  --specs=nano.specs            # Use Newlib Nano
 
   # Preprocessor
   $<$<CONFIG:Release>:-DNDEBUG> # Define symbol NDEBUG for release build
@@ -90,7 +90,7 @@ target_link_options(
 
   # Target Configuration
   -mcpu=cortex-m4                                                 # Specify the target CPU
-  -mfloat-abi=hard                                                # Use hardware floating-point unit
+  -mfloat-abi=soft                                                # Do not use hardware floating-point unit
   -mfpu=fpv4-sp-d16                                               # Specify the floating-point unit type
   -mthumb                                                         # Generate Thumb-2 instructions
 
@@ -102,7 +102,7 @@ target_link_options(
   -Wl,-Map=${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.map,--cref # Generates a map file with cross-reference information
 
   # Standard Library
-  --specs=nano.specs                                               # Use Newlib Nano
+  --specs=nano.specs                                              # Use Newlib Nano
 
   # cmake-format: on
 )
