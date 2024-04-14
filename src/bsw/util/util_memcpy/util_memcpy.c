@@ -1,14 +1,14 @@
 /**
- * @file util_mem.c
+ * @file util_memcpy.c
  * @author 0xemgy (0xemgy@gmail.com)
- * @brief See util_mem.h
+ * @brief See util_memcpy.h
  *
  * @copyright Copyright (c) 2024 0xemgy
  */
 
 // Local Includes ------------------------------------------------------------------------------------------------------
 
-#include "util_mem.h"
+#include "util_memcpy.h"
 
 // Local Defines -------------------------------------------------------------------------------------------------------
 // Local Function Prototypes -------------------------------------------------------------------------------------------
@@ -18,18 +18,13 @@
 // Local Functions -----------------------------------------------------------------------------------------------------
 // Global Functions ----------------------------------------------------------------------------------------------------
 
-void util_mem_memcpy32(uint32_t *dst, const uint32_t *src, uint32_t len)
+void util_memcpy(void *dst, const void *src, uint32_t len)
 {
-    for (uint32_t i = (uint32_t)0; i < len; i++)
-    {
-        dst[i] = src[i];
-    }
-}
+    uint8_t       *dst0 = (uint8_t *)dst;
+    const uint8_t *src0 = (const uint8_t *)src;
 
-void util_mem_memset32(uint32_t *dst, uint32_t val, uint32_t len)
-{
     for (uint32_t i = (uint32_t)0; i < len; i++)
     {
-        dst[i] = val;
+        dst0[i] = src0[i];
     }
 }

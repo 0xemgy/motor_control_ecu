@@ -1,13 +1,13 @@
 /**
- * @file util_mem.h
+ * @file util_memcpy.h
  * @author 0xemgy (0xemgy@gmail.com)
- * @brief Memory utility functions
+ * @brief Copy memory function
  *
  * @copyright Copyright (c) 2024 0xemgy
  */
 
-#ifndef UTIL_MEM_H
-#define UTIL_MEM_H
+#ifndef UTIL_MEMCPY_H
+#define UTIL_MEMCPY_H
 
 // Global Includes -----------------------------------------------------------------------------------------------------
 
@@ -25,15 +25,6 @@
  * @param src Source
  * @param len [byte] Length
  */
-void util_mem_memcpy32(uint32_t *dst, const uint32_t *src, uint32_t len);
-
-/**
- * @brief Set memory
- *
- * @param dst Destination
- * @param val Value
- * @param len [byte] Length
- */
-void util_mem_memset32(uint32_t *dst, uint32_t val, uint32_t len);
+void util_memcpy(void *dst, const void *src, uint32_t len);
 
 #endif

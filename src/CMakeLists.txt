@@ -11,8 +11,10 @@ set(C_SOURCES
     bsw/main.c
     bsw/util/util_debouncer/util_debouncer.c
     bsw/util/util_debouncer/util_debouncer.h
-    bsw/util/util_mem/util_mem.c
-    bsw/util/util_mem/util_mem.h
+    bsw/util/util_memcpy/util_memcpy.c
+    bsw/util/util_memcpy/util_memcpy.h
+    bsw/util/util_memset/util_memset.c
+    bsw/util/util_memset/util_memset.h
     bsw/util/util_timeout/util_timeout.c
     bsw/util/util_timeout/util_timeout.h
     bsw/util/util/util.c
@@ -30,14 +32,16 @@ set(INCLUDES
     bsw/util/util_debouncer
     bsw/util/util_estimator
     bsw/util/util_getter
-    bsw/util/util_mem
-    bsw/util/util_moving_averager
+    bsw/util/util_memcpy
+    bsw/util/util_memset
+    bsw/util/util_averager
     bsw/util/util_scaler
     bsw/util/util_semver
     bsw/util/util_timeout
     bsw/util/util_timestamp
     bsw/vendor
     bsw/vendor/cmsis
+    bsw/vendor/gcc
     bsw/version
 )
 
