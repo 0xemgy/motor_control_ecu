@@ -7,6 +7,7 @@ Checks: ' *,
           -llvm-header-guard,
           -llvmlibc-restrict-system-libc-headers,
           -misc-include-cleaner,
+          -misc-unused-parameters,
 '
 
 CheckOptions:

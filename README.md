@@ -42,7 +42,7 @@
 - not used, needs to be investigated
 
 #### cppcheck
-- all good as of right now
+- uses python in PATH for misra.py checks, should use a local one in tools/python
 
 #### doxygen
 - all good as of right now

@@ -23,6 +23,17 @@
             "hidden": true
         },
         {
+            "name": "mingw_base",
+            "toolchainFile": "${sourceDir}/cmake/toolchain_mingw.cmake",
+            "cacheVariables": {
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+            },
+            "inherits": [
+                "base"
+            ],
+            "hidden": true
+        },
+        {
             "name": "debug",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug"
@@ -38,6 +49,48 @@
             },
             "inherits": [
                 "arm_base"
+            ]
+        },
+        {
+            "name": "test",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release"
+            },
+            "inherits": [
+                "mingw_base"
+            ]
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "build_base",
+            "targets": ["analyze", "analyze_clang_format", "analyze_clang_tidy", "analyze_cppcheck", "analyze_doxygen", "analyze_lizard", "build"],
+            "hidden": true
+        },
+        {
+            "name": "test_base",
+            "targets": ["test_all"],
+            "hidden": true
+        },
+        {
+            "name": "debug",
+            "configurePreset": "debug",
+            "inherits": [
+                "build_base"
+            ]
+        },
+        {
+            "name": "release",
+            "configurePreset": "release",
+            "inherits": [
+                "build_base"
+            ]
+        },
+        {
+            "name": "test",
+            "configurePreset": "test",
+            "inherits": [
+                "test_base"
             ]
         }
     ]

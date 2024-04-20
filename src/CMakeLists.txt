@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.26.1)
 
-# Source files and Include Directories----------------------------------------------------------------------------------
+# Source files and Include Directories ---------------------------------------------------------------------------------
 
 set(ASM_SOURCES
     bsw/interrupt_vector_table.s
@@ -45,9 +45,7 @@ set(INCLUDES
     bsw/version
 )
 
+# CMake files ----------------------------------------------------------------------------------------------------------
+
 include(${CMAKE_SOURCE_DIR}/cmake/arm_gcc_build.cmake)
-include(${CMAKE_SOURCE_DIR}/cmake/clang_format.cmake)
-include(${CMAKE_SOURCE_DIR}/cmake/clang_tidy.cmake)
-include(${CMAKE_SOURCE_DIR}/cmake/cppcheck.cmake)
-include(${CMAKE_SOURCE_DIR}/cmake/doxygen.cmake)
-include(${CMAKE_SOURCE_DIR}/cmake/lizard.cmake)
+include(${CMAKE_SOURCE_DIR}/cmake/analyze.cmake)

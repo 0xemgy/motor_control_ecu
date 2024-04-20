@@ -1,3 +1,6 @@
+
+include(${CMAKE_SOURCE_DIR}/cmake/common_build_options.cmake)
+
 # Absolute Paths -------------------------------------------------------------------------------------------------------
 
 # Get absolute paths to all source files for proper vscode PROBLEMS view file hyperlinks
@@ -15,7 +18,7 @@ endforeach()
 # Executable Settings --------------------------------------------------------------------------------------------------
 
 set(CMAKE_EXECUTABLE_SUFFIX_C ".elf")
-set(EXECUTABLE "app")
+set(EXECUTABLE "build")
 add_executable(${EXECUTABLE} ${C_SOURCES} ${ASM_SOURCES})
 target_include_directories(${EXECUTABLE} PRIVATE ${INCLUDES})
 # set(CMAKE_C_STANDARD_INCLUDE_DIRECTORIES ${CMAKE_C_IMPLICIT_INCLUDE_DIRECTORIES}) # needed for clang-tidy
@@ -25,7 +28,10 @@ set_target_properties(${EXECUTABLE} PROPERTIES OUTPUT_NAME ${PROJECT_NAME})
 
 target_compile_options(
   ${EXECUTABLE}
-  PRIVATE # cmake-format: off
+  PRIVATE
+  # cmake-format: off
+
+  ${COMMON_COMPILE_OPTIONS}     # Options common to HW target and unit test build
 
   # Target Configuration
   -mcpu=cortex-m4               # Specify the target CPU
@@ -33,16 +39,10 @@ target_compile_options(
   -mfpu=fpv4-sp-d16             # Specify the floating-point unit type
   -mthumb                       # Generate Thumb-2 instructions
 
-  # Language Standard
-  -std=c99                      # Specify the C language standard (C99 in this case)
-
   # Optimization
   -O3                           # Enable aggressive code optimization
   -fdata-sections               # Place each data item in its own section
   -ffunction-sections           # Place each function in its own section
-
-  # Debugging Information
-  -g3                           # Include maximum debugging information
 
   # Freestanding Environment
   -ffreestanding                # Indicate a freestanding environment (no standard library) -> memcpy etc. is not used implicitly by the compiler
@@ -50,34 +50,8 @@ target_compile_options(
   -nostartfiles                 # Do not use the standard system startup files
   -nostdinc                     # Do not search through system include path
 
-  # Warnings
-  -fno-common                   # Treats multiple definitions of global variables as an error
-  -pedantic                     # Warn about non-standard constructs
-  -Wall                         # Enable common warning messages
-  -Wcast-qual                   # Warn about inappropriate type qualifiers in pointer casts
-  -Wconversion                  # Warn about implicit conversions that may change the value
-  -Wdouble-promotion            # Warn about implicit double to float promotion
-  # -Werror                       # Treat warnings as errors # TODO reenable when going to into development phase
-  -Wextra                       # Enable additional warning messages
-  -Wfloat-equal                 # Warn about floating-point equality comparisons
-  -Wformat                      # Enables warnings about format string issues
-  -Wmissing-declarations        # Warn if a global function is used without being declared
-  -Wmissing-include-dirs        # Warn if user supplied include directory does not exist
-  -Wmissing-prototypes          # Warn about missing function prototypes
-  -Wparentheses                 # Warn about questionable use of parentheses
-  -Wredundant-decls             # Warn about redundant declarations
-  -Wreturn-type                 # Warn about missing return types
-  -Wshadow                      # Warn when a local variable shadows another variable
-  -Wstrict-overflow             # Warn about assumptions made by the compiler related to overflow
-  -Wswitch-default              # Warn about missing default cases in switch statements
-  -Wuninitialized               # Warn about the use of uninitialized variables
-  -Wunused                      # Warn about unused variables, functions, or parameters
-
   # Standard Library
   --specs=nano.specs            # Use Newlib Nano
-
-  # Preprocessor
-  $<$<CONFIG:Release>:-DNDEBUG> # Define symbol NDEBUG for release build
 
   # cmake-format: on
 )
@@ -88,6 +62,8 @@ target_link_options(
   ${EXECUTABLE}
   PRIVATE
   # cmake-format: off
+
+  ${COMMON_LINK_OPTIONS}     # Options common to HW target and unit test build
 
   # Target Configuration
   -mcpu=cortex-m4                                                 # Specify the target CPU

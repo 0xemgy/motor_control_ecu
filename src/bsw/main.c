@@ -27,17 +27,17 @@ static void unused_test_func(uint8_t foo);
 #define MAGIC_NUMBER_3 ((uint8_t)50)
 #define MAGIC_NUMBER_4 42LU
 
-volatile float a;
-volatile float b;
-volatile float c;
+volatile float aaa;
+volatile float bbb;
+volatile float ccc;
 
 int main(void)
 {
     volatile uint8_t val = MAGIC_NUMBER_1;
 
-    c = a * b;
+    ccc = aaa * bbb;
 
-    (void)c;
+    (void)ccc;
 
     if ((val == MAGIC_NUMBER_1) && (version.sw_version.major == MAGIC_NUMBER_2))
     {
@@ -63,8 +63,8 @@ static const uint8_t bar = 5;
 static volatile bool test_variable = false;
 static uint8_t       main_foo(void);
 
-   uint32_t src[MAGIC_NUMBER_3];
-   uint32_t dst[MAGIC_NUMBER_3];
+uint32_t src[MAGIC_NUMBER_3];
+uint32_t dst[MAGIC_NUMBER_3];
 
 static void unused_test_func(uint8_t foo)
 {
@@ -85,8 +85,9 @@ static void unused_test_func(uint8_t foo)
     (void)foo;
 
     foo = UINT8_MAX;
+    (void)foo;
     util_memcpy(dst, src, UTIL_LEN(src));
-    (void)memcpy(dst, src, sizeof(src));
+    // (void)memcpy(dst, src, sizeof(src));
     // (void)memset(dst, 0, sizeof(dst));
 
     // (void)dst;
