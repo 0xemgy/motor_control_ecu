@@ -49,7 +49,7 @@ static void test_cpy_array_complete(void)
 
     for (uint8_t i = (uint8_t)0; i < N_TEST_VALS; i++)
     {
-        TEST_ASSERT_NOT_EQUAL_UINT8(cpy_data[i], data[i]);
+        TEST_ASSERT_EQUAL_UINT8(cpy_data[i], data[i]);
     }
 }
 

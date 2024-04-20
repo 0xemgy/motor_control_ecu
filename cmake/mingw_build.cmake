@@ -52,7 +52,9 @@ target_link_options(
   ${COMMON_LINK_OPTIONS}     # Options common to HW target and unit test build
 
   # Code coverage
-  -fprofile-arcs             # Enable arc-based profiling
+  -fprofile-arcs                # Enable arc-based profiling
+  -ftest-coverage               # Enable test coverage analysis
+  -fprofile-abs-path            # Use absolute paths
 
   # cmake-format: on
 )

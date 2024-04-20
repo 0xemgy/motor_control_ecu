@@ -69,7 +69,7 @@
         },
         {
             "name": "test_base",
-            "targets": ["test_all"],
+            "targets": ["test"],
             "hidden": true
         },
         {
