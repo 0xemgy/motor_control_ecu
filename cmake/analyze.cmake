@@ -5,6 +5,7 @@ cmake_minimum_required(VERSION 3.26.1)
 add_custom_target(
     analyze_all
     DEPENDS analyze_clang_format analyze_clang_tidy analyze_cppcheck analyze_doxygen analyze_lizard
+
     COMMENT "Running all analyzers"
 )
 
@@ -37,7 +38,10 @@ add_custom_target(
 
 add_custom_target(
   analyze_cppcheck
-  # ${CMAKE_COMMAND} -E env PATH=c:/toolchain/python/v3.12.3-embed-amd64-cust1/
+  # ${CMAKE_COMMAND} -E env --modify PATH=set:"${CMAKE_SOURCE_DIR}/tools/python"
+  #   python.exe --version
+  # COMMAND
+  #   python.exe --version
   COMMAND
     ${CMAKE_SOURCE_DIR}/tools/cppcheck/cppcheck.exe
       -j 4
