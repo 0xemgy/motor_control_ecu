@@ -65,7 +65,7 @@
         {
             "name": "build_base",
             "targets": [
-                "analyze",
+                "analyze_all",
                 "analyze_clang_format",
                 "analyze_clang_tidy",
                 "analyze_cppcheck",

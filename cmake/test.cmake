@@ -28,7 +28,7 @@ function(add_unit_test UNIT_NAME UNIT_DIR ADDITIONAL_C_SOURCES ADDITIONAL_INCLUD
     vendor/unity
   )
 
-  include(${CMAKE_SOURCE_DIR}/cmake/mingw_build.cmake)
+  include(${CMAKE_SOURCE_DIR}/cmake/build_mingw.cmake)
 
   add_test(
     ${TEST_EXECUTABLE}

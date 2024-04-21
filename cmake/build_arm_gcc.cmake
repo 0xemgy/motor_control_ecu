@@ -1,30 +1,37 @@
 cmake_minimum_required(VERSION 3.26.1)
 
-# CMake files ----------------------------------------------------------------------------------------------------------
+# CMake Files ----------------------------------------------------------------------------------------------------------
 
-include(${CMAKE_SOURCE_DIR}/cmake/common_build_options.cmake)
+include(${CMAKE_SOURCE_DIR}/cmake/build_options_common.cmake)
 
 # Absolute Paths -------------------------------------------------------------------------------------------------------
 
-# Get absolute paths to all source files for proper vscode PROBLEMS view file hyperlinks
+# Get absolute paths to all source files
 foreach(c_source ${C_SOURCES})
   get_filename_component(abs_c_source ${c_source} ABSOLUTE)
   list(APPEND ABSOLUTE_C_SOURCES ${abs_c_source})
 endforeach()
 
-# Get absolute paths to all include folders for proper vscode PROBLEMS view file hyperlinks
+# Get absolute paths to all include folders
 foreach(include ${INCLUDES})
   get_filename_component(abs_include ${include} ABSOLUTE)
-  list(APPEND ABSOLUTE_INCLUDES -I${abs_include}) # -I on each folder necessary for cppcheck to find each folder
+  list(APPEND ABSOLUTE_INCLUDES -I${abs_include})
+endforeach()
+
+# Get absolute paths to all system include folders
+foreach(system_include ${SYSTEM_INCLUDES})
+  get_filename_component(abs_system_include ${system_include} ABSOLUTE)
+  list(APPEND ABSOLUTE_SYSTEM_INCLUDES -isystem ${abs_system_include})
 endforeach()
 
 # Executable Settings --------------------------------------------------------------------------------------------------
 
-set(CMAKE_EXECUTABLE_SUFFIX_C ".elf")
 set(EXECUTABLE "build")
+set(CMAKE_EXECUTABLE_SUFFIX_C ".elf")
+
 add_executable(${EXECUTABLE} ${C_SOURCES} ${ASM_SOURCES})
 target_include_directories(${EXECUTABLE} PRIVATE ${INCLUDES})
-# set(CMAKE_C_STANDARD_INCLUDE_DIRECTORIES ${CMAKE_C_IMPLICIT_INCLUDE_DIRECTORIES}) # needed for clang-tidy
+target_include_directories(${EXECUTABLE} SYSTEM PRIVATE ${SYSTEM_INCLUDES})
 set_target_properties(${EXECUTABLE} PROPERTIES OUTPUT_NAME ${PROJECT_NAME})
 
 # Compiler Options -----------------------------------------------------------------------------------------------------
@@ -69,7 +76,8 @@ target_link_options(
   ${COMMON_LINK_OPTIONS}     # Options common to HW target and unit test build
 
   # Target Configuration
-  -mcpu=cortex-m4                                                 # Specify the target CPU
+  -mcpu=${MICROPROCESSOR_TYPE}                                    # Specify the target CPU
+
   -mfloat-abi=soft                                                # Do not use hardware floating-point unit
   -mfpu=fpv4-sp-d16                                               # Specify the floating-point unit type
   -mthumb                                                         # Generate Thumb-2 instructions

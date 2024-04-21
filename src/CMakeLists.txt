@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.26.1)
 
-# Source files and Include Directories ---------------------------------------------------------------------------------
+# Microprocessor Type --------------------------------------------------------------------------------------------------
+
+set(MICROPROCESSOR_TYPE cortex-m4)
+
+# Source Files and Include Directories ---------------------------------------------------------------------------------
 
 set(ASM_SOURCES
     bsw/interrupt_vector_table.s
@@ -40,11 +44,14 @@ set(INCLUDES
     bsw/util/util_timestamp
     bsw/vendor
     bsw/vendor/cmsis
-    bsw/vendor/gcc
     bsw/version
 )
 
-# CMake files ----------------------------------------------------------------------------------------------------------
+set(SYSTEM_INCLUDES
+    bsw/vendor/gcc
+)
 
-include(${CMAKE_SOURCE_DIR}/cmake/arm_gcc_build.cmake)
+# CMake Files ----------------------------------------------------------------------------------------------------------
+
+include(${CMAKE_SOURCE_DIR}/cmake/build_arm_gcc.cmake)
 include(${CMAKE_SOURCE_DIR}/cmake/analyze.cmake)
