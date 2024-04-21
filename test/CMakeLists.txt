@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.26.1)
 
+# CMake files ----------------------------------------------------------------------------------------------------------
+
 include(${CMAKE_SOURCE_DIR}/cmake/unit_test.cmake)
+
+# Unit tests -----------------------------------------------------------------------------------------------------------
 
 add_unit_test(util_memset ${CMAKE_SOURCE_DIR}/src/bsw/util/util_memset ADDITIONAL_C_SOURCES_NONE ADDITIONAL_INCLUDES_NONE)
 add_unit_test(util_memcpy ${CMAKE_SOURCE_DIR}/src/bsw/util/util_memcpy ADDITIONAL_C_SOURCES_NONE ADDITIONAL_INCLUDES_NONE)

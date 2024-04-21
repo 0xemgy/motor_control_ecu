@@ -9,4 +9,7 @@ set(CMAKE_C_STANDARD 99)
 set(CMAKE_C_EXTENSIONS OFF)
 
 add_subdirectory(src)
+
+#include(CTest)
+enable_testing()
 add_subdirectory(test)

@@ -1,3 +1,5 @@
+cmake_minimum_required(VERSION 3.26.1)
+
 # Compiler Options -----------------------------------------------------------------------------------------------------
 
 set(COMMON_COMPILE_OPTIONS

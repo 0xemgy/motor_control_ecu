@@ -24,7 +24,6 @@ set(C_SOURCES
 )
 
 set(INCLUDES
-    ${CMAKE_CURRENT_BINARY_DIR}
     bsw
     bsw/config
     bsw/util

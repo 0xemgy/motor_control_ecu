@@ -64,12 +64,23 @@
     "buildPresets": [
         {
             "name": "build_base",
-            "targets": ["analyze", "analyze_clang_format", "analyze_clang_tidy", "analyze_cppcheck", "analyze_doxygen", "analyze_lizard", "build"],
+            "targets": [
+                "analyze",
+                "analyze_clang_format",
+                "analyze_clang_tidy",
+                "analyze_cppcheck",
+                "analyze_doxygen",
+                "analyze_lizard",
+                "build"],
             "hidden": true
         },
         {
             "name": "test_base",
-            "targets": ["test"],
+            "targets": [
+                "test_all",
+                "test_util_memcpy",
+                "test_util_memset"
+            ],
             "hidden": true
         },
         {
@@ -92,6 +103,12 @@
             "inherits": [
                 "test_base"
             ]
+        }
+    ],
+    "testPresets": [
+        {
+            "name": "test",
+            "configurePreset": "test"
         }
     ]
 }

@@ -1,3 +1,6 @@
+cmake_minimum_required(VERSION 3.26.1)
+
+# CMake files ----------------------------------------------------------------------------------------------------------
 
 include(${CMAKE_SOURCE_DIR}/cmake/common_build_options.cmake)
 
@@ -20,7 +23,6 @@ endforeach()
 set(CMAKE_EXECUTABLE_SUFFIX_C ".exe")
 add_executable(${TEST_EXECUTABLE} ${C_SOURCES})
 target_include_directories(${TEST_EXECUTABLE} PRIVATE ${INCLUDES})
-target_link_libraries(${TEST_EXECUTABLE} gcov)
 
 # Compiler Options -----------------------------------------------------------------------------------------------------
 

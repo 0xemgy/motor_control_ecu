@@ -1,13 +1,11 @@
+cmake_minimum_required(VERSION 3.26.1)
 
+# Build all tests target -----------------------------------------------------------------------------------------------
 add_custom_target(
-  test
-  COMMAND ctest --output-on-failure
-  COMMAND python -m gcovr -r ${CMAKE_BINARY_DIR} --html --html-details -o coverage_report.html
+  test_all
 )
 
-set(ALL_TEST_EXECUTABLES "")
-
-enable_testing()
+# Add unit test function -----------------------------------------------------------------------------------------------
 
 set(ADDITIONAL_C_SOURCES_NONE "")
 set(ADDITIONAL_INCLUDES_NONE "")
@@ -36,6 +34,6 @@ function(add_unit_test UNIT_NAME UNIT_DIR ADDITIONAL_C_SOURCES ADDITIONAL_INCLUD
     ${TEST_EXECUTABLE}
     ${TEST_EXECUTABLE})
 
-  add_dependencies(test ${TEST_EXECUTABLE})
+  add_dependencies(test_all ${TEST_EXECUTABLE})
 
 endfunction()

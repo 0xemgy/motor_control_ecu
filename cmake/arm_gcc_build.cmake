@@ -1,3 +1,6 @@
+cmake_minimum_required(VERSION 3.26.1)
+
+# CMake files ----------------------------------------------------------------------------------------------------------
 
 include(${CMAKE_SOURCE_DIR}/cmake/common_build_options.cmake)
 
@@ -108,14 +111,3 @@ set_target_properties(
     ADDITIONAL_CLEAN_FILES
     "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.bin;${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.hex;${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.map"
 )
-
-# Version File Generation ----------------------------------------------------------------------------------------------
-
-include(${CMAKE_SOURCE_DIR}/cmake/version_file_generator.cmake)
-
-# add_custom_target(version_file_generator
-#     COMMAND ${CMAKE_COMMAND} -P ${CMAKE_SOURCE_DIR}/cmake/version_file_generator.cmake
-#     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-# )
-
-# add_dependencies(${EXECUTABLE} version_file_generator)

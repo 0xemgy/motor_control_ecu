@@ -1,3 +1,5 @@
+cmake_minimum_required(VERSION 3.26.1)
+
 set(CMAKE_SYSTEM_NAME Windows)
 set(CMAKE_SYSTEM_PROCESSOR x86_64)
 
