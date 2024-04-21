@@ -37,29 +37,29 @@ add_custom_target(
 
 add_custom_target(
   analyze_cppcheck
+  # ${CMAKE_COMMAND} -E env PATH=c:/toolchain/python/v3.12.3-embed-amd64-cust1/
   COMMAND
     ${CMAKE_SOURCE_DIR}/tools/cppcheck/cppcheck.exe
+      -j 4
       --platform=win64
 
       # Check settings
-      --addon=${CMAKE_SOURCE_DIR}/tools/cppcheck/misra.json  # Run MISRA-C-2012 checks
-      --check-level=exhaustive                                # Set exhaustive check level
-      --enable=all                                            # Enable all available checks
-      --std=c99                                               # Specify C99 standard
-      --inline-suppr                                          # Enable inline suppressions
-      --template=gcc                                          # Use GCC template for reporting
-
-      # Suppressions to avoid false positives
-      --suppress=missingIncludeSystem     # Avoid false positives on <stdbool.h> and <stdint.h> includes
+      --addon=misra.json        # Run MISRA-C-2012 checks
+      --check-level=exhaustive  # Set exhaustive check level
+      --enable=all              # Enable all available checks
+      --disable=unusedFunction  # The function 'function name' is never used
+      --std=c99                 # Specify C99 standard
+      --inline-suppr            # Enable inline suppressions
+      --template=gcc            # Use GCC template for reporting
 
       # Suppressions for utility code
-      --suppress=unusedFunction:*util*    # The function 'function name' is never used
       --suppress=misra-c2012-19.2:*util*  # The union keyword should not be used
       --suppress=misra-c2012-2.3:*util*   # A project should not contain unused type declarations
       --suppress=misra-c2012-2.4:*util*   # A project should not contain unused tag declarations
       --suppress=misra-c2012-2.5:*util*   # A project should not contain unused macro declarations
 
       # Suppressions for entire code base
+      --suppress=missingIncludeSystem     # Avoid false positives on <stdbool.h> and <stdint.h> includes
       --suppress=misra-c2012-8.9:*        # An object should be defined at block scope if its identifier only appears in a single function
 
       # Inlude paths and source files
@@ -67,6 +67,7 @@ add_custom_target(
       ${ABSOLUTE_SYSTEM_INCLUDES}
       ${ABSOLUTE_C_SOURCES}
 
+  WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
   COMMENT "Running cppcheck static code analysis"
 )
 
@@ -76,6 +77,7 @@ add_custom_target(
   analyze_doxygen
   COMMAND
     env PROJECT_NAME=${CMAKE_PROJECT_NAME}
+    env DOT_PATH=${CMAKE_SOURCE_DIR}/tools/graphviz/bin
     env INPUT=${CMAKE_CURRENT_SOURCE_DIR}
     env EXCLUDE=${CMAKE_CURRENT_SOURCE_DIR}/bsw/vendor/
     env OUTPUT_DIRECTORY=${CMAKE_CURRENT_BINARY_DIR}/doxygen
@@ -94,7 +96,7 @@ add_custom_target(
 add_custom_target(
   analyze_lizard
   COMMAND
-    "${CMAKE_SOURCE_DIR}/tools/lizard/lizard.exe"
+    "${CMAKE_SOURCE_DIR}/tools/python/Scripts/lizard.exe"
       --working_threads 4
       --warnings_only
       --modified

@@ -1,3 +1,12 @@
+/**
+ * @file main.c
+ * @author 0xemgy (0xemgy@gmail.com)
+ * @brief Main function
+ *
+ * @copyright Copyright (c) 2024 0xemgy
+ */
+
+// Local Includes ------------------------------------------------------------------------------------------------------
 
 #include "util.h"
 #include "util_memcpy.h"
@@ -8,7 +17,30 @@
 #include <stdint.h>
 // #include <string.h>
 
+// Local Defines -------------------------------------------------------------------------------------------------------
+
+#define MAGIC_NUMBER_1 ((uint8_t)255)  /**< Magic number */
+#define MAGIC_NUMBER_2 ((uint8_t)0x10) /**< Magic number */
+#define MAGIC_NUMBER_3 ((uint8_t)50)   /**< Magic number */
+#define MAGIC_NUMBER_4 42LU            /**< Magic number */
+
+// Local Function Prototypes -------------------------------------------------------------------------------------------
+
+/**
+ * @brief Foo
+ *
+ * @return bar
+ */
+static uint8_t main_foo(void);
+
+/**
+ * @brief bar
+ *
+ * @param foo foo
+ */
 static void unused_test_func(uint8_t foo);
+
+// Local Data Types ----------------------------------------------------------------------------------------------------
 
 // typedef struct test_struct
 // {
@@ -22,49 +54,23 @@ static void unused_test_func(uint8_t foo);
 //     TEST_ENUM_MAX
 // } test_enum_t;
 
-#define MAGIC_NUMBER_1 ((uint8_t)255)
-#define MAGIC_NUMBER_2 ((uint8_t)0x10)
-#define MAGIC_NUMBER_3 ((uint8_t)50)
-#define MAGIC_NUMBER_4 42LU
+// Local Variables -----------------------------------------------------------------------------------------------------
 
-static volatile float aaa;
-static volatile float bbb;
-static volatile float ccc;
+static volatile float aaa;                   /**< Dummy variable */
+static volatile float bbb;                   /**< Dummy variable */
+static volatile float ccc;                   /**< Dummy variable */
+static const uint8_t  bar           = 5;     /**< Dummy variable */
+static volatile bool  test_variable = false; /**< Dummy variable */
+static uint32_t       src[MAGIC_NUMBER_3];   /**< Dummy variable */
+static uint32_t       dst[MAGIC_NUMBER_3];   /**< Dummy variable */
 
-int main(void)
-{
-    volatile uint8_t val = MAGIC_NUMBER_1;
-
-    ccc = aaa * bbb;
-
-    (void)ccc;
-
-    if ((val == MAGIC_NUMBER_1) && (version.sw_version.major == MAGIC_NUMBER_2))
-    {
-        val = 4;
-    }
-
-    unused_test_func(val); // 3.2 non-compliant comment ends with backslash
-
-    while (1)
-    {
-    }
-
-    return 0;
-}
-
-static const uint8_t bar = 5;
+// Global Variables ----------------------------------------------------------------------------------------------------
+// Local Functions -----------------------------------------------------------------------------------------------------
 
 // void misra_2_7_unused_param (int *param1, int unused_param)
 // {
 //     *param1 = 42U;
 // }
-
-static volatile bool test_variable = false;
-static uint8_t       main_foo(void);
-
-static uint32_t src[MAGIC_NUMBER_3];
-static uint32_t dst[MAGIC_NUMBER_3];
 
 static void unused_test_func(uint8_t foo)
 {
@@ -94,4 +100,33 @@ static void unused_test_func(uint8_t foo)
 static uint8_t main_foo(void)
 {
     return MAGIC_NUMBER_4;
+}
+
+// Global Functions ----------------------------------------------------------------------------------------------------
+
+/**
+ * @brief Main function
+ *
+ * @return 0
+ */
+int main(void)
+{
+    volatile uint8_t val = MAGIC_NUMBER_1;
+
+    ccc = aaa * bbb;
+
+    (void)ccc;
+
+    if ((val == MAGIC_NUMBER_1) && (version.sw_version.major == MAGIC_NUMBER_2))
+    {
+        val = 4;
+    }
+
+    unused_test_func(val); // 3.2 non-compliant comment ends with backslash
+
+    while (1)
+    {
+    }
+
+    return 0;
 }
