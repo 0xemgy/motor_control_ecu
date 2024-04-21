@@ -77,7 +77,7 @@
         {
             "name": "test_base",
             "targets": [
-                "check",
+                "test_all",
                 "test_util_memcpy",
                 "test_util_memset"
             ],

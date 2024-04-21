@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.26.1)
 
 # Build all tests target -----------------------------------------------------------------------------------------------
 add_custom_target(
-  check
+  test_all
 )
 
 # Add unit test function -----------------------------------------------------------------------------------------------
@@ -34,6 +34,6 @@ function(add_unit_test UNIT_NAME UNIT_DIR ADDITIONAL_C_SOURCES ADDITIONAL_INCLUD
     ${TEST_EXECUTABLE}
     ${TEST_EXECUTABLE})
 
-  add_dependencies(check ${TEST_EXECUTABLE})
+  add_dependencies(test_all ${TEST_EXECUTABLE})
 
 endfunction()
