@@ -7,7 +7,7 @@ set(MICROPROCESSOR_TYPE cortex-m4)
 # Source Files and Include Directories ---------------------------------------------------------------------------------
 
 set(ASM_SOURCES
-    bsw/interrupt_vector_table.s
+    bsw/irq_vectors.s
     bsw/startup.s
 )
 
