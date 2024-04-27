@@ -39,7 +39,6 @@ target_compile_options(
   # Code coverage
   -fprofile-arcs                # Enable arc-based profiling
   -ftest-coverage               # Enable test coverage analysis
-  -fprofile-abs-path            # Use absolute paths
 
   # cmake-format: on
 )
@@ -56,7 +55,6 @@ target_link_options(
   # Code coverage
   -fprofile-arcs                # Enable arc-based profiling
   -ftest-coverage               # Enable test coverage analysis
-  -fprofile-abs-path            # Use absolute paths
 
   # cmake-format: on
 )
