@@ -25,9 +25,6 @@
         {
             "name": "mingw_base",
             "toolchainFile": "${sourceDir}/cmake/toolchain_mingw.cmake",
-            "cacheVariables": {
-                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
-            },
             "inherits": [
                 "base"
             ],
