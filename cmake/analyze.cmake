@@ -38,29 +38,36 @@ add_custom_target(
 
 add_custom_target(
   analyze_cppcheck
-  # ${CMAKE_COMMAND} -E env --modify PATH=set:"${CMAKE_SOURCE_DIR}/tools/python"
-  #   python.exe --version
-  # COMMAND
-  #   python.exe --version
-  COMMAND
+  ${CMAKE_COMMAND}
+    -E env
+      --modify PATH=set:"${CMAKE_SOURCE_DIR}/tools/python"
+      --modify PYTHONPATH=set:"${CMAKE_SOURCE_DIR}/tools/cppcheck/addons"
+
     ${CMAKE_SOURCE_DIR}/tools/cppcheck/cppcheck.exe
-      -j 4
       --platform=win64
 
       # Check settings
       --addon=misra.json        # Run MISRA-C-2012 checks
       --check-level=exhaustive  # Set exhaustive check level
       --enable=all              # Enable all available checks
-      --disable=unusedFunction  # The function 'function name' is never used
       --std=c99                 # Specify C99 standard
       --inline-suppr            # Enable inline suppressions
       --template=gcc            # Use GCC template for reporting
 
+      --suppress=checkersReport # Active checkers: x/y (use --checkers-report=<filename> to see details)
+
       # Suppressions for utility code
-      --suppress=misra-c2012-19.2:*util*  # The union keyword should not be used
-      --suppress=misra-c2012-2.3:*util*   # A project should not contain unused type declarations
-      --suppress=misra-c2012-2.4:*util*   # A project should not contain unused tag declarations
-      --suppress=misra-c2012-2.5:*util*   # A project should not contain unused macro declarations
+      --suppress=misra-c2012-19.2:*util*    # The union keyword should not be used
+      --suppress=misra-c2012-2.3:*util*     # A project should not contain unused type declarations
+      --suppress=misra-c2012-2.4:*util*     # A project should not contain unused tag declarations
+      --suppress=misra-c2012-2.5:*util*     # A project should not contain unused macro declarations
+      --suppress=misra-c2012-8.7:*util*     # Functions and objects should not be defined with external linkage if they are referenced in only one translation unit
+      --suppress=unusedFunction:*util*      # The function 'function name' is never used
+      --suppress=unusedStructMember:*util*  # struct member 'struct member name' is never used
+
+       # Suppressions for version
+       --suppress=unusedStructMember:*version*  # struct member 'struct member name' is never used
+       --suppress=misra-c2012-8.4:*version*  # A compatible declaration shall be visible when an object or function with external linkage is defined
 
       # Suppressions for entire code base
       --suppress=missingIncludeSystem     # Avoid false positives on <stdbool.h> and <stdint.h> includes

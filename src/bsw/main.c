@@ -86,7 +86,7 @@ static void unused_test_func(uint8_t foo)
 
     if (foo == main_foo())
     {
-        test_variable = foo > (uint8_t)0;
+        // test_variable = foo > (uint8_t)0;
     }
     (void)foo;
 
