@@ -6,5 +6,6 @@ project(motor_control_ecu_app VERSION 0.1.0 LANGUAGES C ASM)
 
 add_subdirectory(src)
 
+include(CTest)
 enable_testing()
 add_subdirectory(test)
