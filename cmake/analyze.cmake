@@ -61,17 +61,20 @@ add_custom_target(
       --suppress=misra-c2012-2.3:*util*     # A project should not contain unused type declarations
       --suppress=misra-c2012-2.4:*util*     # A project should not contain unused tag declarations
       --suppress=misra-c2012-2.5:*util*     # A project should not contain unused macro declarations
-      --suppress=misra-c2012-8.7:*util*     # Functions and objects should not be defined with external linkage if they are referenced in only one translation unit
+      --suppress=misra-c2012-8.7:*util*     # Functions and objects should not be defined with external linkage if they
+                                            # are referenced in only one translation unit
       --suppress=unusedFunction:*util*      # The function 'function name' is never used
       --suppress=unusedStructMember:*util*  # struct member 'struct member name' is never used
 
        # Suppressions for version
        --suppress=unusedStructMember:*version*  # struct member 'struct member name' is never used
-       --suppress=misra-c2012-8.4:*version*  # A compatible declaration shall be visible when an object or function with external linkage is defined
+       --suppress=misra-c2012-8.4:*version*     # A compatible declaration shall be visible when an object or function
+                                                # with external linkage is defined
 
       # Suppressions for entire code base
       --suppress=missingIncludeSystem     # Avoid false positives on <stdbool.h> and <stdint.h> includes
-      --suppress=misra-c2012-8.9:*        # An object should be defined at block scope if its identifier only appears in a single function
+      --suppress=misra-c2012-8.9:*        # An object should be defined at block scope if its identifier only appears in
+                                          # a single function
 
       # Inlude paths and source files
       ${ABSOLUTE_INCLUDES}
