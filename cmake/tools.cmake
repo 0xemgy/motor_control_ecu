@@ -1,0 +1,14 @@
+cmake_minimum_required(VERSION 3.26.1)
+
+set(TOOLS_PATH "${PROJECT_SOURCE_DIR}/tools")
+
+set(TOOLS_PYTHON_PATH "${TOOLS_PATH}/python")
+set(TOOLS_CLANG_FORMAT_PATH "${TOOLS_PATH}/clang_format")
+set(TOOLS_CLANG_TIDY_PATH "${TOOLS_PATH}/clang_tidy")
+set(TOOLS_CPPCHECK_PATH "${TOOLS_PATH}/cppcheck")
+set(TOOLS_DOXYGEN_PATH "${TOOLS_PATH}/doxygen")
+
+set(TOOLS_CLANG_FORMAT ${TOOLS_CLANG_FORMAT_PATH}/clang-format.exe)
+set(TOOLS_CLANG_TIDY ${TOOLS_CLANG_TIDY_PATH}/clang-tidy.exe)
+set(TOOLS_CPPCHECK ${TOOLS_CPPCHECK_PATH}/cppcheck.exe)
+set(TOOLS_DOXYGEN "${TOOLS_DOXYGEN_PATH}/doxygen.exe")

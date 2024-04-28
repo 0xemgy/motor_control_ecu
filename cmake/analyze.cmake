@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.26.1)
 
+include(${CMAKE_SOURCE_DIR}/cmake/tools.cmake)
+
 # Run All Analyzers ----------------------------------------------------------------------------------------------------
 
 add_custom_target(
@@ -14,7 +16,7 @@ add_custom_target(
 add_custom_target(
   analyze_clang_format
   COMMAND
-    ${CMAKE_SOURCE_DIR}/tools/clang_format/clang-format.exe
+  ${TOOLS_CLANG_FORMAT}
       --dry-run
       --Werror
       ${ABSOLUTE_C_SOURCES}
@@ -27,7 +29,7 @@ add_custom_target(
 add_custom_target(
   analyze_clang_tidy
   COMMAND
-    ${CMAKE_SOURCE_DIR}/tools/clang_tidy/clang-tidy.exe
+    ${TOOLS_CLANG_TIDY}
       -p=${CMAKE_BINARY_DIR}
       ${ABSOLUTE_C_SOURCES}
 
@@ -40,10 +42,10 @@ add_custom_target(
   analyze_cppcheck
   ${CMAKE_COMMAND}
     -E env
-      --modify PATH=set:"${CMAKE_SOURCE_DIR}/tools/python"
-      --modify PYTHONPATH=set:"${CMAKE_SOURCE_DIR}/tools/cppcheck/addons"
+      --modify PATH=set:"${TOOLS_PYTHON_PATH}"
+      --modify PYTHONPATH=set:"${TOOLS_CPPCHECK_PATH}/addons"
 
-    ${CMAKE_SOURCE_DIR}/tools/cppcheck/cppcheck.exe
+    ${TOOLS_CPPCHECK}
       --platform=win64
 
       # Check settings
@@ -95,7 +97,7 @@ add_custom_target(
     env INPUT=${CMAKE_CURRENT_SOURCE_DIR}
     env EXCLUDE=${CMAKE_CURRENT_SOURCE_DIR}/bsw/vendor/
     env OUTPUT_DIRECTORY=${CMAKE_CURRENT_BINARY_DIR}/doxygen
-    ${CMAKE_SOURCE_DIR}/tools/doxygen/doxygen.exe
+    ${TOOLS_DOXYGEN}
       ${CMAKE_SOURCE_DIR}/Doxyfile
 
   COMMENT "Running doxygen code commenting analysis"
@@ -109,8 +111,11 @@ add_custom_target(
 
 add_custom_target(
   analyze_lizard
-  COMMAND
-    "${CMAKE_SOURCE_DIR}/tools/python/Scripts/lizard.exe"
+  ${CMAKE_COMMAND}
+  -E env
+    --modify PATH=set:"${TOOLS_PYTHON_PATH}"
+
+    python -m lizard
       --working_threads 4
       --warnings_only
       --modified
