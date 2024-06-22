@@ -113,9 +113,17 @@ add_custom_command(
 # Clean Command --------------------------------------------------------------------------------------------------------
 
 # Clean bin, hex and map files (cmake deletes only the elf file by default)
-set_target_properties(
-  ${EXECUTABLE}
-  PROPERTIES
-    ADDITIONAL_CLEAN_FILES
-    "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.bin;${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.hex;${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.map"
+set_property(
+  DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+  APPEND
+  PROPERTY ADDITIONAL_CLEAN_FILES ${PROJECT_NAME}.bin
+  PROPERTY ADDITIONAL_CLEAN_FILES ${PROJECT_NAME}.hex
+  PROPERTY ADDITIONAL_CLEAN_FILES ${PROJECT_NAME}.map
+)
+
+# Clean doxygen folder
+set_property(
+  DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+  APPEND
+  PROPERTY ADDITIONAL_CLEAN_FILES doxygen
 )

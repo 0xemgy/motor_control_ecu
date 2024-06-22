@@ -62,3 +62,15 @@ target_link_options(
 # Post Build Commands---------------------------------------------------------------------------------------------------
 
 # Clean Command --------------------------------------------------------------------------------------------------------
+
+# Clean coverage files and folders that are known apriori (unit test specific html files are not known a priori)
+set_property(
+  DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+  APPEND
+  PROPERTY ADDITIONAL_CLEAN_FILES CMakeFiles
+  PROPERTY ADDITIONAL_CLEAN_FILES cmake_install.cmake
+  PROPERTY ADDITIONAL_CLEAN_FILES coverage.css
+  PROPERTY ADDITIONAL_CLEAN_FILES coverage.html
+  PROPERTY ADDITIONAL_CLEAN_FILES coverage.functions.html
+  PROPERTY ADDITIONAL_CLEAN_FILES CTestTestfile.cmake
+)
