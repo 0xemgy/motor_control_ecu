@@ -1,11 +1,26 @@
 cmake_minimum_required(VERSION 3.26.1)
 
+# Tools Paths ----------------------------------------------------------------------------------------------------------
+
 include(${CMAKE_SOURCE_DIR}/cmake/tools.cmake)
 
 # Build all tests target -----------------------------------------------------------------------------------------------
+
 add_custom_target(
   test_build_all
 )
+
+# Run all tests target -------------------------------------------------------------------------------------------------
+
+add_custom_target(
+  test_run_all
+  COMMAND
+  ${CMAKE_CTEST_COMMAND} -T test --output-on-failure -R
+
+  WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+)
+
+add_dependencies(test_run_all test_build_all)
 
 # Coverage target ------------------------------------------------------------------------------------------------------
 
@@ -23,6 +38,8 @@ add_custom_target(
 
   WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
 )
+
+add_dependencies(test_coverage test_run_all)
 
 # Add unit test function -----------------------------------------------------------------------------------------------
 

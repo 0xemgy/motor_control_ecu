@@ -75,6 +75,7 @@
             "name": "test_base",
             "targets": [
                 "test_build_all",
+                "test_run_all",
                 "test_coverage",
                 "test_util_memcpy",
                 "test_util_memset"
