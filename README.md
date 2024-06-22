@@ -2,6 +2,7 @@
 
 - [motor\_control\_ecu](#motor_control_ecu)
   - [Notes](#notes)
+    - [vscode](#vscode)
     - [Analyzers](#analyzers)
       - [Misc](#misc)
       - [clang-format](#clang-format)
@@ -19,6 +20,10 @@
       - [Debugging via vscode](#debugging-via-vscode)
 
 ## Notes
+
+### vscode
+- clang format and cmake format paths must be handwritten -> use python script or relative paths if vscode starts to
+support it in the settings.json
 
 ### Analyzers
 
@@ -38,6 +43,7 @@
     - is getting the file name supported
     - is adding a custom check easy (extensive documentation available)
   - modify clang-tidy code in llvm repo
+  - false positive on some stdint/bool includes (not all, not related to nostdinc)
 
 #### cmake-format
 - settings need some tweaking
