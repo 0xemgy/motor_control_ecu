@@ -78,13 +78,12 @@ support it in the settings.json
 
 #### Unity and fff
 - build library and add to each test instead of building for each test
-- make Unity error prompts gcc format compatible to enable proper vscode PROBLEMS parsing
 
 #### ctest
-- add files to clean command
 - vscode Test Explorer UI test file hyperlinks link to cmake files instead of test files (fix this if possible)
+- put include(CTest) into test.cmake if Test Explorer UI can be configured to find it there (currently only works if include is in top CMakeLists.txt)
 
 #### gcovr
 - the coverage of a unit that has a dedicated unit test but is also used by other units, which are tested, probably consists of the merged data (not just the data of the dedicated unit test) -> this should be fixed if possible (and if assumption is even true)
-
+- if test in run accidentally in debug preset, gcov fails in test preset because it finds debug gcov files too, so debug folder needs to be deleted -> fix this by only searching through test build
 #### Debugging via vscode
