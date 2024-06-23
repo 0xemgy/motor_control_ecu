@@ -40,6 +40,9 @@ target_compile_options(
   -fprofile-arcs                # Enable arc-based profiling
   -ftest-coverage               # Enable test coverage analysis
 
+  # Global defines
+  -DUNITY_OUTPUT_FOR_VSCODE     # Custom unity output for vscode PROBLEMS view
+
   # cmake-format: on
 )
 

@@ -491,7 +491,7 @@ void UnityPrintFloat(const UNITY_DOUBLE input_number)
 #endif /* ! UNITY_EXCLUDE_FLOAT_PRINT */
 
 /*-----------------------------------------------*/
-static void UnityTestResultsBegin(const char* file, const UNITY_LINE_TYPE line)
+static void UnityTestResultsBegin(const char* file, const UNITY_LINE_TYPE line, int fail)
 {
 #ifdef UNITY_OUTPUT_FOR_ECLIPSE
     UNITY_OUTPUT_CHAR('(');
@@ -500,6 +500,20 @@ static void UnityTestResultsBegin(const char* file, const UNITY_LINE_TYPE line)
     UnityPrintNumber((UNITY_INT)line);
     UNITY_OUTPUT_CHAR(')');
     UNITY_OUTPUT_CHAR(' ');
+    UnityPrint(Unity.CurrentTestName);
+    UNITY_OUTPUT_CHAR(':');
+#else
+#ifdef UNITY_OUTPUT_FOR_VSCODE
+    UnityPrint(file);
+    UNITY_OUTPUT_CHAR(':');
+    UnityPrintNumber((UNITY_INT)line);
+    UnityPrint(": ");
+
+    if(fail != 0)
+    {
+        UnityPrint("error: ");
+    }
+
     UnityPrint(Unity.CurrentTestName);
     UNITY_OUTPUT_CHAR(':');
 #else
@@ -531,12 +545,13 @@ static void UnityTestResultsBegin(const char* file, const UNITY_LINE_TYPE line)
 #endif
 #endif
 #endif
+#endif
 }
 
 /*-----------------------------------------------*/
 static void UnityTestResultsFailBegin(const UNITY_LINE_TYPE line)
 {
-    UnityTestResultsBegin(Unity.TestFile, line);
+    UnityTestResultsBegin(Unity.TestFile, line, 1);
     UnityPrint(UnityStrFail);
     UNITY_OUTPUT_CHAR(':');
 }
@@ -550,7 +565,7 @@ void UnityConcludeTest(void)
     }
     else if (!Unity.CurrentTestFailed)
     {
-        UnityTestResultsBegin(Unity.TestFile, Unity.CurrentTestLineNumber);
+        UnityTestResultsBegin(Unity.TestFile, Unity.CurrentTestLineNumber, 0);
         UnityPrint(UnityStrPass);
     }
     else
@@ -2117,7 +2132,7 @@ void UnityFail(const char* msg, const UNITY_LINE_TYPE line)
 {
     RETURN_IF_FAIL_OR_IGNORE;
 
-    UnityTestResultsBegin(Unity.TestFile, line);
+    UnityTestResultsBegin(Unity.TestFile, line, 1);
     UnityPrint(UnityStrFail);
     if (msg != NULL)
     {
@@ -2154,7 +2169,7 @@ void UnityIgnore(const char* msg, const UNITY_LINE_TYPE line)
 {
     RETURN_IF_FAIL_OR_IGNORE;
 
-    UnityTestResultsBegin(Unity.TestFile, line);
+    UnityTestResultsBegin(Unity.TestFile, line, 0);
     UnityPrint(UnityStrIgnore);
     if (msg != NULL)
     {
@@ -2168,7 +2183,7 @@ void UnityIgnore(const char* msg, const UNITY_LINE_TYPE line)
 /*-----------------------------------------------*/
 void UnityMessage(const char* msg, const UNITY_LINE_TYPE line)
 {
-    UnityTestResultsBegin(Unity.TestFile, line);
+    UnityTestResultsBegin(Unity.TestFile, line, 0);
     UnityPrint("INFO");
     if (msg != NULL)
     {
