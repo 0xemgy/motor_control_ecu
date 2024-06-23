@@ -13,16 +13,19 @@ set(ASM_SOURCES
 
 set(C_SOURCES
     bsw/main.c
+    bsw/util/util/util.c
+    bsw/util/util/util.h
     bsw/util/util_debouncer/util_debouncer.c
     bsw/util/util_debouncer/util_debouncer.h
+    bsw/util/util_getter/util_getter.h
     bsw/util/util_memcpy/util_memcpy.c
     bsw/util/util_memcpy/util_memcpy.h
     bsw/util/util_memset/util_memset.c
     bsw/util/util_memset/util_memset.h
+    bsw/util/util_semver/util_semver.h
     bsw/util/util_timeout/util_timeout.c
     bsw/util/util_timeout/util_timeout.h
-    bsw/util/util/util.c
-    bsw/util/util/util.h
+    bsw/util/util_timestamp/util_timestamp.h
     bsw/version/version.c
     bsw/version/version.h
 )

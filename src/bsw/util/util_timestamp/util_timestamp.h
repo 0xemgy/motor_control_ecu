@@ -17,7 +17,7 @@
 
 // Global Defines ------------------------------------------------------------------------------------------------------
 
-#define UTIL_TIMESTAMP_BASE_YEAR                 ((uint32_t)2000) /**< Base year */
+#define UTIL_TIMESTAMP_BASE_YEAR ((uint32_t)2000) /**< Base year */
 
 /**
  * @brief Convert decimal year to BCD year
