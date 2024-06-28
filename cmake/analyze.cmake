@@ -91,12 +91,13 @@ add_custom_target(
 
 add_custom_target(
   analyze_doxygen
-  COMMAND
-    env PROJECT_NAME=${CMAKE_PROJECT_NAME}
-    env DOT_PATH=${TOOLS_GRAPHVIZ_PATH}
-    env INPUT=${CMAKE_CURRENT_SOURCE_DIR}
-    env EXCLUDE=${CMAKE_CURRENT_SOURCE_DIR}/bsw/vendor/
-    env OUTPUT_DIRECTORY=${CMAKE_CURRENT_BINARY_DIR}/doxygen
+  ${CMAKE_COMMAND}
+    -E env
+    --modify PROJECT_NAME=set:"${CMAKE_PROJECT_NAME}"
+    --modify DOT_PATH=set:"${TOOLS_GRAPHVIZ_PATH}"
+    --modify INPUT=set:"${CMAKE_CURRENT_SOURCE_DIR}"
+    --modify EXCLUDE=set:"${CMAKE_CURRENT_SOURCE_DIR}/bsw/vendor/"
+    --modify OUTPUT_DIRECTORY=set:"${CMAKE_CURRENT_BINARY_DIR}/doxygen"
     ${TOOLS_DOXYGEN}
       ${CMAKE_SOURCE_DIR}/Doxyfile
 
