@@ -4,20 +4,6 @@ cmake_minimum_required(VERSION 3.26.1)
 
 include(${CMAKE_SOURCE_DIR}/cmake/build_options_common.cmake)
 
-# Absolute Paths -------------------------------------------------------------------------------------------------------
-
-# Get absolute paths to all source files for proper vscode PROBLEMS view file hyperlinks
-foreach(c_source ${C_SOURCES})
-  get_filename_component(abs_c_source ${c_source} ABSOLUTE)
-  list(APPEND ABSOLUTE_C_SOURCES ${abs_c_source})
-endforeach()
-
-# Get absolute paths to all include folders for proper vscode PROBLEMS view file hyperlinks
-foreach(include ${INCLUDES})
-  get_filename_component(abs_include ${include} ABSOLUTE)
-  list(APPEND ABSOLUTE_INCLUDES -I${abs_include}) # -I on each folder necessary for cppcheck to find each folder
-endforeach()
-
 # Executable Settings --------------------------------------------------------------------------------------------------
 
 set(CMAKE_EXECUTABLE_SUFFIX_C ".exe")

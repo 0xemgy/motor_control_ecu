@@ -4,26 +4,6 @@ cmake_minimum_required(VERSION 3.26.1)
 
 include(${CMAKE_SOURCE_DIR}/cmake/build_options_common.cmake)
 
-# Absolute Paths -------------------------------------------------------------------------------------------------------
-
-# Get absolute paths to all source files
-foreach(c_source ${C_SOURCES})
-  get_filename_component(abs_c_source ${c_source} ABSOLUTE)
-  list(APPEND ABSOLUTE_C_SOURCES ${abs_c_source})
-endforeach()
-
-# Get absolute paths to all include folders
-foreach(include ${INCLUDES})
-  get_filename_component(abs_include ${include} ABSOLUTE)
-  list(APPEND ABSOLUTE_INCLUDES -I${abs_include})
-endforeach()
-
-# Get absolute paths to all system include folders
-foreach(system_include ${SYSTEM_INCLUDES})
-  get_filename_component(abs_system_include ${system_include} ABSOLUTE)
-  list(APPEND ABSOLUTE_SYSTEM_INCLUDES -isystem ${abs_system_include})
-endforeach()
-
 # Executable Settings --------------------------------------------------------------------------------------------------
 
 set(EXECUTABLE "build")
