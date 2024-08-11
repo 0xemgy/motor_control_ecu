@@ -15,7 +15,8 @@
             "name": "arm_base",
             "toolchainFile": "${sourceDir}/cmake/toolchain_arm_gcc.cmake",
             "cacheVariables": {
-                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+                "UNIT_TEST": "OFF"
             },
             "inherits": [
                 "base"
@@ -25,6 +26,9 @@
         {
             "name": "mingw_base",
             "toolchainFile": "${sourceDir}/cmake/toolchain_mingw.cmake",
+            "cacheVariables": {
+                "UNIT_TEST": "ON"
+            },
             "inherits": [
                 "base"
             ],
