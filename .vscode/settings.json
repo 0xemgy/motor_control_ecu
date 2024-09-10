@@ -1,4 +1,4 @@
 {
-    "clang-format.executable": "C:/toolchain/clang_format/v16.0.0/clang-format.exe",
-    "cmakeFormat.exePath": "C:/toolchain/cmake_format/v0.6.13/cmake-format.exe",
+    "clang-format.executable": "${workspaceRoot}/tools/clang_format/clang-format.exe",
+    "cmakeFormat.exePath": "C:/work/repos/motor_control_ecu/tools/cmake_format/cmake-format.exe",
 }
