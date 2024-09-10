@@ -131,22 +131,37 @@ add_custom_target(
 
 # lizard ---------------------------------------------------------------------------------------------------------------
 
+set(LIZARD_COMMON_ARGS
+    --working_threads 4
+    --modified
+    --length 200
+    --arguments 2
+    -Tnloc=1000
+    -Ttoken_count=500
+    ${ABSOLUTE_C_SOURCES}
+)
+
+
 add_custom_target(
   analyze_lizard
-  ${CMAKE_COMMAND}
+
+  # Silent execution to xml output for html report
+  COMMAND ${CMAKE_COMMAND}
   -E env
     --modify PATH=set:"${TOOLS_PYTHON_PATH}"
 
     python -m lizard
-      --working_threads 4
+      ${LIZARD_COMMON_ARGS}
+      -o ${CMAKE_BINARY_DIR}/lizard-report.xml
+
+  # Warnings only execution for console output
+  COMMAND ${CMAKE_COMMAND}
+  -E env
+    --modify PATH=set:"${TOOLS_PYTHON_PATH}"
+
+    python -m lizard
+      ${LIZARD_COMMON_ARGS}
       --warnings_only
-      --modified
-      --CCN 15
-      --length 200
-      --arguments 5
-      -Tnloc=1000
-      -Ttoken_count=500
-      ${ABSOLUTE_C_SOURCES}
 
   COMMENT "Running Lizard code complexity analysis"
 )
