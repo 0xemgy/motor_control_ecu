@@ -56,5 +56,5 @@ set(SYSTEM_INCLUDES
 
 # CMake Files ----------------------------------------------------------------------------------------------------------
 
-include(${CMAKE_SOURCE_DIR}/cmake/build_arm_gcc.cmake)
 include(${CMAKE_SOURCE_DIR}/cmake/analyze.cmake)
+include(${CMAKE_SOURCE_DIR}/cmake/build_arm_gcc.cmake)

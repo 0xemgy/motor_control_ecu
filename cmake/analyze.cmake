@@ -75,6 +75,7 @@ add_custom_target(
       --std=c99                 # Specify C99 standard
       --inline-suppr            # Enable inline suppressions
       --template=gcc            # Use GCC template for reporting
+      --error-exitcode=1        # Fail if any issues are found
 
       --suppress=checkersReport # Active checkers: x/y (use --checkers-report=<filename> to see details)
 
@@ -98,7 +99,7 @@ add_custom_target(
       --suppress=misra-c2012-8.9:*        # An object should be defined at block scope if its identifier only appears in
                                           # a single function
 
-      # Inlude paths and source files
+      # Include paths and source files
       ${ABSOLUTE_INCLUDES}
       ${ABSOLUTE_SYSTEM_INCLUDES}
       ${ABSOLUTE_C_SOURCES}
