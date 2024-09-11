@@ -43,6 +43,9 @@ target_compile_options(
   # Standard Library
   --specs=nano.specs            # Use Newlib Nano
 
+  # Stack Usage Output
+  -fstack-usage
+
   # cmake-format: on
 )
 
