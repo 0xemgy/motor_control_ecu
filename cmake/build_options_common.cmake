@@ -8,6 +8,7 @@ set(COMMON_COMPILE_OPTIONS
 
   # Debugging Information
   -g3                           # Include maximum debugging information
+  -gdwarf-2                     # Use DWARF version 2 for debugging information format
 
   # Warnings
   -fno-common                   # Treats multiple definitions of global variables as an error
