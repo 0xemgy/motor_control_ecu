@@ -43,25 +43,24 @@ add_dependencies(test_coverage test_run_all)
 
 # Add unit test function -----------------------------------------------------------------------------------------------
 
-set(ADDITIONAL_C_SOURCES_NONE "")
-set(ADDITIONAL_INCLUDES_NONE "")
-
-function(add_unit_test UNIT_NAME UNIT_DIR ADDITIONAL_C_SOURCES ADDITIONAL_INCLUDES)
+function(add_unit_test UNIT_NAME UNIT_DIR)
+  set(multiValueArgs ADDITIONAL_C_SOURCES ADDITIONAL_INCLUDES)
+  cmake_parse_arguments("OPTIONAL_ARG" "" "" "${multiValueArgs}" ${ARGN})
 
   set(TEST_EXECUTABLE test_${UNIT_NAME})
 
   set(C_SOURCES
-    ${C_SOURCES}
-    ${TEST_EXECUTABLE}/${TEST_EXECUTABLE}.c
-    ${UNIT_DIR}/${UNIT_NAME}.c
-    vendor/unity/unity.c
+      ${TEST_EXECUTABLE}/${TEST_EXECUTABLE}.c
+      ${UNIT_DIR}/${UNIT_NAME}.c
+      ${OPTIONAL_ARG_ADDITIONAL_C_SOURCES}
+      vendor/unity/unity.c
   )
 
   set(INCLUDES
-    ${INCLUDES}
-    ${UNIT_DIR}
-    vendor/fff
-    vendor/unity
+      ${UNIT_DIR}
+      ${OPTIONAL_ARG_ADDITIONAL_INCLUDES}
+      vendor/fff
+      vendor/unity
   )
 
   include(${CMAKE_SOURCE_DIR}/cmake/build_mingw.cmake)
