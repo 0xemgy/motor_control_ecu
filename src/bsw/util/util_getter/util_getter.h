@@ -75,7 +75,7 @@ union util_getter_uint8_functions
 /**
  * @brief Getter function context
  */
-typedef struct util_getter_uint8_t
+typedef struct util_getter_uint8
 {
     util_getter_type_t                type;      /**< Type */
     union util_getter_uint8_functions functions; /**< Functions */
@@ -102,7 +102,7 @@ union util_getter_int16_functions
 /**
  * @brief Getter function context
  */
-typedef struct util_getter_int16_t
+typedef struct util_getter_int16
 {
     util_getter_type_t                type;      /**< Type */
     union util_getter_int16_functions functions; /**< Functions */
@@ -129,7 +129,7 @@ union util_getter_int32_functions
 /**
  * @brief Getter function context
  */
-typedef struct util_getter_int32_t
+typedef struct util_getter_int32
 {
     util_getter_type_t                type;      /**< Type */
     union util_getter_int32_functions functions; /**< Functions */
@@ -155,7 +155,7 @@ union util_getter_int8_functions
 /**
  * @brief Getter function context
  */
-typedef struct util_getter_int8_t
+typedef struct util_getter_int8
 {
     util_getter_type_t               type;      /**< Type */
     union util_getter_int8_functions functions; /**< Functions */
@@ -182,7 +182,7 @@ union util_getter_uint16_functions
 /**
  * @brief Getter function context
  */
-typedef struct util_getter_uint16_t
+typedef struct util_getter_uint16
 {
     util_getter_type_t                 type;      /**< Type */
     union util_getter_uint16_functions functions; /**< Functions */
@@ -209,7 +209,7 @@ union util_getter_uint32_functions
 /**
  * @brief Getter function context
  */
-typedef struct util_getter_uint32_t
+typedef struct util_getter_uint32
 {
     util_getter_type_t                 type;      /**< Type */
     union util_getter_uint32_functions functions; /**< Functions */
