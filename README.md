@@ -5,6 +5,7 @@
     - [vscode](#vscode)
     - [Analyzers](#analyzers)
       - [Misc](#misc)
+      - [c\_naming\_checker](#c_naming_checker)
       - [clang-format](#clang-format)
       - [clang-tidy](#clang-tidy)
       - [cmake-format](#cmake-format)
@@ -31,6 +32,11 @@ support it in the settings.json
 - a single analyze target is missing
 - the ALL target should have a fixed execution order
   - build -> analyze -> test
+
+#### c_naming_checker
+- Add info and debug print using the logging package
+- Parse an ignore file instead of ignoring a list of patterns
+- Clean up AI generated code
 
 #### clang-format
 - nothing comes to mind
