@@ -135,7 +135,7 @@ set(LIZARD_COMMON_ARGS
     --working_threads 4
     --modified
     --length 200
-    --arguments 2
+    --arguments 5
     -Tnloc=1000
     -Ttoken_count=500
     ${ABSOLUTE_C_SOURCES}
