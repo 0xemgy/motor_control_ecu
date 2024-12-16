@@ -72,6 +72,7 @@
                 "analyze_cppcheck",
                 "analyze_doxygen",
                 "analyze_lizard",
+                "analyze_naming",
                 "build"],
             "hidden": true
         },

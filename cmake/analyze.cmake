@@ -26,7 +26,7 @@ endforeach()
 
 add_custom_target(
     analyze_all
-    DEPENDS analyze_clang_format analyze_clang_tidy analyze_cppcheck analyze_doxygen analyze_lizard
+    DEPENDS analyze_clang_format analyze_clang_tidy analyze_cppcheck analyze_doxygen analyze_lizard analyze_naming
 
     COMMENT "Running all analyzers"
 )
@@ -141,7 +141,6 @@ set(LIZARD_COMMON_ARGS
     ${ABSOLUTE_C_SOURCES}
 )
 
-
 add_custom_target(
   analyze_lizard
 
@@ -164,4 +163,22 @@ add_custom_target(
       --warnings_only
 
   COMMENT "Running Lizard code complexity analysis"
+)
+
+# naming ---------------------------------------------------------------------------------------------------------------
+
+add_custom_target(
+  analyze_naming
+
+  COMMAND ${CMAKE_COMMAND}
+  -E env
+    --modify PATH=set:"${TOOLS_PYTHON_PATH}"
+
+    python ${TOOLS_C_NAMING_CHECKER}
+      --files ${ABSOLUTE_C_SOURCES}
+      --ignore */main.c
+      --libclang ${TOOLS_LIBCLANG}
+
+  WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/src
+  COMMENT "Running C naming analysis"
 )
