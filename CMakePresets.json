@@ -66,14 +66,15 @@
         {
             "name": "build_base",
             "targets": [
+                "build",
                 "analyze_all",
                 "analyze_clang_format",
                 "analyze_clang_tidy",
                 "analyze_cppcheck",
                 "analyze_doxygen",
                 "analyze_lizard",
-                "analyze_naming",
-                "build"],
+                "analyze_memory",
+                "analyze_naming"],
             "hidden": true
         },
         {

@@ -26,7 +26,7 @@ endforeach()
 
 add_custom_target(
     analyze_all
-    DEPENDS analyze_clang_format analyze_clang_tidy analyze_cppcheck analyze_doxygen analyze_lizard analyze_naming
+    DEPENDS analyze_clang_format analyze_clang_tidy analyze_cppcheck analyze_doxygen analyze_lizard analyze_memory analyze_naming
 
     COMMENT "Running all analyzers"
 )
@@ -50,7 +50,7 @@ add_custom_target(
   analyze_clang_tidy
   COMMAND
     ${TOOLS_CLANG_TIDY}
-      -p=${CMAKE_BINARY_DIR}
+      -p=${CMAKE_CURRENT_BINARY_DIR}
       ${ABSOLUTE_C_SOURCES}
 
   COMMENT "Running clang-tidy static code analysis"
@@ -151,7 +151,7 @@ add_custom_target(
 
     python -m lizard
       ${LIZARD_COMMON_ARGS}
-      -o ${CMAKE_BINARY_DIR}/lizard-report.xml
+      -o ${CMAKE_CURRENT_BINARY_DIR}/lizard_report.csv
 
   # Warnings only execution for console output
   COMMAND ${CMAKE_COMMAND}
@@ -163,6 +163,25 @@ add_custom_target(
       --warnings_only
 
   COMMENT "Running Lizard code complexity analysis"
+)
+
+# memory ---------------------------------------------------------------------------------------------------------------
+
+add_custom_target(
+  analyze_memory
+
+  COMMAND ${CMAKE_COMMAND}
+  -E env
+    --modify PATH=set:"${TOOLS_PYTHON_PATH}"
+
+    python ${TOOLS_MEMORY_USAGE_ANALYZER}
+      --map_file_path ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.map
+      --elf_file_path ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.elf
+      --su_file_dir ${CMAKE_CURRENT_BINARY_DIR}
+      --json_report_path ${CMAKE_CURRENT_BINARY_DIR}/memory_report.json
+
+  WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+  COMMENT "Running memory analysis"
 )
 
 # naming ---------------------------------------------------------------------------------------------------------------
