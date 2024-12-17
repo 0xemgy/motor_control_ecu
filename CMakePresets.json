@@ -68,13 +68,14 @@
             "targets": [
                 "build",
                 "analyze_all",
-                "analyze_clang_format",
-                "analyze_clang_tidy",
-                "analyze_cppcheck",
-                "analyze_doxygen",
-                "analyze_lizard",
-                "analyze_memory",
-                "analyze_naming"],
+                "analyze_naming",
+                "analyze_formatting",
+                "analyze_comments",
+                "analyze_static_code",
+                "analyze_static_code_2",
+                "analyze_metrics",
+                "analyze_memory"
+            ],
             "hidden": true
         },
         {

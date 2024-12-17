@@ -26,40 +26,133 @@ endforeach()
 
 add_custom_target(
     analyze_all
-    DEPENDS analyze_clang_format analyze_clang_tidy analyze_cppcheck analyze_doxygen analyze_lizard analyze_memory analyze_naming
+    DEPENDS analyze_naming analyze_formatting analyze_comments analyze_static_code analyze_static_code_2 analyze_metrics analyze_memory
 
     COMMENT "Running all analyzers"
 )
 
-# clang-format ---------------------------------------------------------------------------------------------------------
+# comments --------------------------------------------------------------------------------------------------------------
 
 add_custom_target(
-  analyze_clang_format
+  analyze_comments
+  ${CMAKE_COMMAND}
+    -E env
+    --modify PROJECT_NAME=set:"${CMAKE_PROJECT_NAME}"
+    --modify DOT_PATH=set:"${TOOLS_GRAPHVIZ_PATH}"
+    --modify INPUT=set:"${CMAKE_CURRENT_SOURCE_DIR}"
+    --modify EXCLUDE=set:"${CMAKE_CURRENT_SOURCE_DIR}/bsw/vendor/"
+    --modify OUTPUT_DIRECTORY=set:"${CMAKE_CURRENT_BINARY_DIR}/doxygen"
+    ${TOOLS_DOXYGEN}
+      ${CMAKE_SOURCE_DIR}/Doxyfile
+  COMMENT "Running comments analysis"
+)
+
+# formatting ------------------------------------------------------------------------------------------------------
+
+add_custom_target(
+  analyze_formatting
   COMMAND
   ${TOOLS_CLANG_FORMAT}
       --dry-run
       --Werror
       ${ABSOLUTE_C_SOURCES}
 
-  COMMENT "Running clang-format code formatting analysis"
+  COMMENT "Running formatting analysis"
 )
 
-# clang-tidy------------------------------------------------------------------------------------------------------------
+# iwyu -----------------------------------------------------------------------------------------------------------------
+
+# TODO add iwyu
+
+# memory ---------------------------------------------------------------------------------------------------------------
 
 add_custom_target(
-  analyze_clang_tidy
+  analyze_memory
+
+  COMMAND ${CMAKE_COMMAND}
+  -E env
+    --modify PATH=set:"${TOOLS_PYTHON_PATH}"
+
+    python ${TOOLS_MEMORY_USAGE_ANALYZER}
+      --map_file_path ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.map
+      --elf_file_path ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.elf
+      --su_file_dir ${CMAKE_CURRENT_BINARY_DIR}
+      --json_report_path ${CMAKE_CURRENT_BINARY_DIR}/memory_report.json
+
+  WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+  COMMENT "Running memory analysis"
+)
+
+# metrics ---------------------------------------------------------------------------------------------------------------
+
+set(LIZARD_COMMON_ARGS
+    --working_threads 4
+    --modified
+    --length 200
+    --arguments 5
+    -Tnloc=1000
+    -Ttoken_count=500
+    ${ABSOLUTE_C_SOURCES}
+)
+
+add_custom_target(
+  analyze_metrics
+
+  # Silent execution to xml output for html report
+  COMMAND ${CMAKE_COMMAND}
+  -E env
+    --modify PATH=set:"${TOOLS_PYTHON_PATH}"
+
+    python -m lizard
+      ${LIZARD_COMMON_ARGS}
+      -o ${CMAKE_CURRENT_BINARY_DIR}/metrics_report.csv
+
+  # Warnings only execution for console output
+  COMMAND ${CMAKE_COMMAND}
+  -E env
+    --modify PATH=set:"${TOOLS_PYTHON_PATH}"
+
+    python -m lizard
+      ${LIZARD_COMMON_ARGS}
+      --warnings_only
+
+  COMMENT "Running metrics analysis"
+)
+
+# naming ---------------------------------------------------------------------------------------------------------------
+
+add_custom_target(
+  analyze_naming
+
+  COMMAND ${CMAKE_COMMAND}
+  -E env
+    --modify PATH=set:"${TOOLS_PYTHON_PATH}"
+
+    python ${TOOLS_C_NAMING_CHECKER}
+      --files ${ABSOLUTE_C_SOURCES}
+      --ignore */main.c
+      --libclang ${TOOLS_LIBCLANG}
+
+  WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/src
+  COMMENT "Running naming analysis"
+)
+
+# static_code ----------------------------------------------------------------------------------------------------------
+
+add_custom_target(
+  analyze_static_code
   COMMAND
     ${TOOLS_CLANG_TIDY}
       -p=${CMAKE_CURRENT_BINARY_DIR}
       ${ABSOLUTE_C_SOURCES}
 
-  COMMENT "Running clang-tidy static code analysis"
+  COMMENT "Running static code analysis"
 )
 
-# cppcheck -------------------------------------------------------------------------------------------------------------
+# static_code_2 --------------------------------------------------------------------------------------------------------
 
 add_custom_target(
-  analyze_cppcheck
+  analyze_static_code_2
   ${CMAKE_COMMAND}
     -E env
       --modify PATH=set:"${TOOLS_PYTHON_PATH}"
@@ -105,99 +198,5 @@ add_custom_target(
       ${ABSOLUTE_C_SOURCES}
 
   WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-  COMMENT "Running cppcheck static code analysis"
-)
-
-# doxygen --------------------------------------------------------------------------------------------------------------
-
-add_custom_target(
-  analyze_doxygen
-  ${CMAKE_COMMAND}
-    -E env
-    --modify PROJECT_NAME=set:"${CMAKE_PROJECT_NAME}"
-    --modify DOT_PATH=set:"${TOOLS_GRAPHVIZ_PATH}"
-    --modify INPUT=set:"${CMAKE_CURRENT_SOURCE_DIR}"
-    --modify EXCLUDE=set:"${CMAKE_CURRENT_SOURCE_DIR}/bsw/vendor/"
-    --modify OUTPUT_DIRECTORY=set:"${CMAKE_CURRENT_BINARY_DIR}/doxygen"
-    ${TOOLS_DOXYGEN}
-      ${CMAKE_SOURCE_DIR}/Doxyfile
-
-  COMMENT "Running doxygen code commenting analysis"
-)
-
-# iwyu -----------------------------------------------------------------------------------------------------------------
-
-# TODO add iwyu
-
-# lizard ---------------------------------------------------------------------------------------------------------------
-
-set(LIZARD_COMMON_ARGS
-    --working_threads 4
-    --modified
-    --length 200
-    --arguments 5
-    -Tnloc=1000
-    -Ttoken_count=500
-    ${ABSOLUTE_C_SOURCES}
-)
-
-add_custom_target(
-  analyze_lizard
-
-  # Silent execution to xml output for html report
-  COMMAND ${CMAKE_COMMAND}
-  -E env
-    --modify PATH=set:"${TOOLS_PYTHON_PATH}"
-
-    python -m lizard
-      ${LIZARD_COMMON_ARGS}
-      -o ${CMAKE_CURRENT_BINARY_DIR}/lizard_report.csv
-
-  # Warnings only execution for console output
-  COMMAND ${CMAKE_COMMAND}
-  -E env
-    --modify PATH=set:"${TOOLS_PYTHON_PATH}"
-
-    python -m lizard
-      ${LIZARD_COMMON_ARGS}
-      --warnings_only
-
-  COMMENT "Running Lizard code complexity analysis"
-)
-
-# memory ---------------------------------------------------------------------------------------------------------------
-
-add_custom_target(
-  analyze_memory
-
-  COMMAND ${CMAKE_COMMAND}
-  -E env
-    --modify PATH=set:"${TOOLS_PYTHON_PATH}"
-
-    python ${TOOLS_MEMORY_USAGE_ANALYZER}
-      --map_file_path ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.map
-      --elf_file_path ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.elf
-      --su_file_dir ${CMAKE_CURRENT_BINARY_DIR}
-      --json_report_path ${CMAKE_CURRENT_BINARY_DIR}/memory_report.json
-
-  WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-  COMMENT "Running memory analysis"
-)
-
-# naming ---------------------------------------------------------------------------------------------------------------
-
-add_custom_target(
-  analyze_naming
-
-  COMMAND ${CMAKE_COMMAND}
-  -E env
-    --modify PATH=set:"${TOOLS_PYTHON_PATH}"
-
-    python ${TOOLS_C_NAMING_CHECKER}
-      --files ${ABSOLUTE_C_SOURCES}
-      --ignore */main.c
-      --libclang ${TOOLS_LIBCLANG}
-
-  WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/src
-  COMMENT "Running C naming analysis"
+  COMMENT "Running static code 2 analysis"
 )
