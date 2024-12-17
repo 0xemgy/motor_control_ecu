@@ -64,12 +64,6 @@ support it in the settings.json
 - uses python in PATH for misra.py checks, should use a local one in tools/python
 
 #### doxygen
-- vscode output gets mangled on every first error like this (on output panel and also terminal)
-```
-[build] Adding xrefitems...
-[build] SortingC:/work/repos/motor_control_ecu/src/bsw/main.c:22: error: Member MAGIC_NUMBER_1 (macro definition) of file main.c is not documented.
-```
-- causes erroneous problems view hyperlink
 - generating graphs takes long, for analysis only minimal html is generated, and this only because it is needed for proper checking
 - a doxygen generation for documentation should have a different doxyfile
 
