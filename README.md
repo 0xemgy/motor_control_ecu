@@ -14,6 +14,7 @@
       - [doxygen](#doxygen)
       - [iwyu](#iwyu)
       - [lizard](#lizard)
+      - [memory\_usage\_analyzer](#memory_usage_analyzer)
     - [Unit Tests](#unit-tests)
       - [Unity and fff](#unity-and-fff)
       - [ctest](#ctest)
@@ -36,6 +37,7 @@ support it in the settings.json
 #### c_naming_checker
 - Add info and debug print using the logging package
 - Parse an ignore file instead of ignoring a list of patterns
+- add version
 - Clean up AI generated code
 
 #### clang-format
@@ -79,6 +81,12 @@ support it in the settings.json
 - the output statistics are interesting
   - right now only warnings are output
   - maybe when codechecker can be used stats can be show there
+
+#### memory_usage_analyzer
+- Clean up AI generated code
+- add file and folder exist checks
+- use logging instead of prints
+- add version and verbose
 
 ### Unit Tests
 
