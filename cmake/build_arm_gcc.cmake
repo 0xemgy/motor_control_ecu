@@ -110,3 +110,13 @@ set_property(
   APPEND
   PROPERTY ADDITIONAL_CLEAN_FILES doxygen
 )
+
+# Clean report files
+set_property(
+  DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+  APPEND
+  PROPERTY ADDITIONAL_CLEAN_FILES loc_report.json
+  PROPERTY ADDITIONAL_CLEAN_FILES memory_report.json
+  PROPERTY ADDITIONAL_CLEAN_FILES metrics_report.csv
+  PROPERTY ADDITIONAL_CLEAN_FILES naming_report.json
+)
