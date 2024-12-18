@@ -148,8 +148,9 @@ add_custom_target(
       --files ${ABSOLUTE_C_SOURCES}
       --ignore */main.c
       --libclang ${TOOLS_LIBCLANG}
+      --out ${CMAKE_CURRENT_BINARY_DIR}/naming_report.json
 
-  WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/src
+  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
   COMMENT "Running naming analysis"
 )
 
