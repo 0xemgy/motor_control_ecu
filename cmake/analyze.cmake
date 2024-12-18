@@ -26,7 +26,7 @@ endforeach()
 
 add_custom_target(
     analyze_all
-    DEPENDS analyze_naming analyze_formatting analyze_comments analyze_static_code analyze_static_code_2 analyze_metrics analyze_memory
+    DEPENDS analyze_naming analyze_formatting analyze_comments analyze_static_code analyze_static_code_2 analyze_metrics analyze_memory analyze_loc
 
     COMMENT "Running all analyzers"
 )
@@ -47,7 +47,7 @@ add_custom_target(
   COMMENT "Running comments analysis"
 )
 
-# formatting ------------------------------------------------------------------------------------------------------
+# formatting -----------------------------------------------------------------------------------------------------------
 
 add_custom_target(
   analyze_formatting
@@ -56,6 +56,22 @@ add_custom_target(
       --dry-run
       --Werror
       ${ABSOLUTE_C_SOURCES}
+
+  COMMENT "Running formatting analysis"
+)
+
+# loc ------------------------------------------------------------------------------------------------------------------
+
+add_custom_target(
+  analyze_loc
+  COMMAND
+  ${TOOLS_CLOC}
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    --exclude-dir=vendor
+    --by-file-by-lang
+    --json
+    --out=${CMAKE_CURRENT_BINARY_DIR}/loc_report.json
+    --quiet
 
   COMMENT "Running formatting analysis"
 )
@@ -83,7 +99,7 @@ add_custom_target(
   COMMENT "Running memory analysis"
 )
 
-# metrics ---------------------------------------------------------------------------------------------------------------
+# metrics --------------------------------------------------------------------------------------------------------------
 
 set(LIZARD_COMMON_ARGS
     --working_threads 4

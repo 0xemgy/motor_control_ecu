@@ -5,6 +5,7 @@ mklink /D ".\tools\arm_gnu_toolchain\" "c:\toolchain\arm_gnu_toolchain\arm-gnu-t
 mklink /D ".\tools\c_naming_checker\" "c:\toolchain\c_naming_checker\v0.0.1"
 mklink /D ".\tools\clang_format\" "c:\toolchain\clang_format\v16.0.0\"
 mklink /D ".\tools\clang_tidy\" "c:\toolchain\clang_tidy\v18.1.1\"
+mklink /D ".\tools\cloc\" "c:\toolchain\cloc\v2.02\"
 mklink /D ".\tools\cmake_format\" "c:\toolchain\cmake_format\v0.6.13\"
 mklink /D ".\tools\cmake\" "c:\toolchain\cmake\v3.26.1\"
 mklink /D ".\tools\cppcheck\" "c:\toolchain\cppcheck\v2.14\"
