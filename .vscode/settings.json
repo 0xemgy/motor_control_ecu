@@ -1,4 +1,4 @@
 {
     "clang-format.executable": "${workspaceRoot}/tools/clang_format/clang-format.exe",
-    "cmakeFormat.exePath": "C:/work/repos/motor_control_ecu/tools/cmake_format/cmake-format.exe",
+    "cmakeFormat.exePath": "${workspaceRoot}/tools/cmake_format/cmake-format.exe",
 }
