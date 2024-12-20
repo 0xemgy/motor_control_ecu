@@ -26,7 +26,7 @@ endforeach()
 
 add_custom_target(
     analyze_all
-    DEPENDS analyze_naming analyze_formatting analyze_comments analyze_static_code analyze_static_code_2 analyze_metrics analyze_memory analyze_loc
+    DEPENDS analyze_naming analyze_formatting analyze_comments analyze_static_code analyze_static_code_2 analyze_metrics analyze_memory analyze_loc analyze_generate_report
 
     COMMENT "Running all analyzers"
 )
@@ -152,6 +152,22 @@ add_custom_target(
 
   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
   COMMENT "Running naming analysis"
+)
+
+# report ---------------------------------------------------------------------------------------------------------------
+
+add_custom_target(
+  analyze_generate_report
+
+  COMMAND ${CMAKE_COMMAND}
+  -E env
+    --modify PATH=set:"${TOOLS_PYTHON_PATH}"
+
+    python ${TOOLS_HTML_REPORT_GENERATOR}
+      --report_dir ${CMAKE_CURRENT_BINARY_DIR}
+
+  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+  COMMENT "Running analysis report generation"
 )
 
 # static_code ----------------------------------------------------------------------------------------------------------

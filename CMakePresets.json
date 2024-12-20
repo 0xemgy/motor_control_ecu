@@ -75,7 +75,8 @@
                 "analyze_static_code_2",
                 "analyze_metrics",
                 "analyze_memory",
-                "analyze_loc"
+                "analyze_loc",
+                "analyze_generate_report"
             ],
             "hidden": true
         },

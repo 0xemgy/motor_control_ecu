@@ -115,6 +115,7 @@ set_property(
 set_property(
   DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
   APPEND
+  PROPERTY ADDITIONAL_CLEAN_FILES analysis_report.html
   PROPERTY ADDITIONAL_CLEAN_FILES loc_report.json
   PROPERTY ADDITIONAL_CLEAN_FILES memory_report.json
   PROPERTY ADDITIONAL_CLEAN_FILES metrics_report.csv
