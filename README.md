@@ -12,6 +12,7 @@
       - [codechecker](#codechecker)
       - [cppcheck](#cppcheck)
       - [doxygen](#doxygen)
+      - [html report generator](#html-report-generator)
       - [iwyu](#iwyu)
       - [lizard](#lizard)
       - [memory\_usage\_analyzer](#memory_usage_analyzer)
@@ -67,8 +68,16 @@ support it in the settings.json
 - generating graphs takes long, for analysis only minimal html is generated, and this only because it is needed for proper checking
 - a doxygen generation for documentation should have a different doxyfile
 
+#### html report generator
+- add error handling
+- check race conditions when analyze_all (xml dump files in lizard output)
+- use xml lizard output, get max settings from somewhere
+  - csv output does not contain totals/averages/per file state, only per function
+  - no max allowed NLOC etc neither in csv nor in xml
+- improve memory tables with expand/collapse + seciton/region sizes just like STM32CubeIDE
+
 #### iwyu
-- can't be built with clang 18 windows built because of hard Visual Studio dependency
+- can't be built with clang 18 windows built because of assembly file to big, with clang 19 because of missing function
 - maybe use an old version back when binaries where provided (very old, probably very buggy)
 
 #### lizard
