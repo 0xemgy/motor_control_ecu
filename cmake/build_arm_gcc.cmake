@@ -8,11 +8,21 @@ include(${CMAKE_SOURCE_DIR}/cmake/build_options_common.cmake)
 
 set(EXECUTABLE "build")
 set(CMAKE_EXECUTABLE_SUFFIX_C ".elf")
+set(OUTPUT_NAME_UNSIGNED ${PROJECT_NAME}_unsigned)
+set(OUTPUT_NAME_SIGNED ${PROJECT_NAME})
+set(OUTPUT_NAME_DETAILED ${PROJECT_NAME}_v${PROJECT_VERSION}_${CMAKE_BUILD_TYPE})
 
 add_executable(${EXECUTABLE} ${C_SOURCES} ${ASM_SOURCES})
 target_include_directories(${EXECUTABLE} PRIVATE ${INCLUDES})
 target_include_directories(${EXECUTABLE} SYSTEM PRIVATE ${SYSTEM_INCLUDES})
-set_target_properties(${EXECUTABLE} PROPERTIES OUTPUT_NAME ${PROJECT_NAME}_unsigned)
+set_target_properties(${EXECUTABLE} PROPERTIES OUTPUT_NAME OUTPUT_NAME_UNSIGNED)
+
+# Git ------------------------------------------------------------------------------------------------------------------
+
+find_package(Git)
+if(NOT GIT_FOUND)
+  message("Error: Git not found - necessary for Code Signer. Git must be in PATH")
+endif()
 
 # Compiler Options -----------------------------------------------------------------------------------------------------
 
@@ -81,26 +91,51 @@ target_link_options(
 # Post Build Commands---------------------------------------------------------------------------------------------------
 
 # Print executable size
-add_custom_command(TARGET ${EXECUTABLE} POST_BUILD COMMAND ${CMAKE_SIZE_UTIL} ${PROJECT_NAME}_unsigned.elf)
+add_custom_command(TARGET ${EXECUTABLE} POST_BUILD COMMAND ${CMAKE_SIZE_UTIL} ${OUTPUT_NAME_UNSIGNED}.elf)
 
-# Create bin file
+# Create signed elf file
 add_custom_command(
-  TARGET ${EXECUTABLE} POST_BUILD COMMAND ${CMAKE_OBJCOPY} -O binary ${PROJECT_NAME}.elf ${PROJECT_NAME}.bin
+  TARGET ${EXECUTABLE}
+  POST_BUILD
+  COMMAND ${CMAKE_COMMAND}
+  -E env
+    --modify PATH=set:"${TOOLS_PYTHON_PATH}"
+    --modify GIT_PYTHON_GIT_EXECUTABLE=set:"${GIT_EXECUTABLE}"
+
+    python ${TOOLS_CODE_SIGNER}
+      --elf_path ${CMAKE_CURRENT_BINARY_DIR}/${OUTPUT_NAME_UNSIGNED}.elf
+      --project_name ${PROJECT_NAME}
+      --sw_version ${PROJECT_VERSION}
+      --build_type ${CMAKE_BUILD_TYPE}
+
+  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+)
+
+# Create elf with details in name
+add_custom_command(
+  TARGET ${EXECUTABLE} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${OUTPUT_NAME_SIGNED}.elf ${OUTPUT_NAME_DETAILED}.elf
 )
 
 # Create hex file
 add_custom_command(
-  TARGET ${EXECUTABLE} POST_BUILD COMMAND ${CMAKE_OBJCOPY} -O ihex ${PROJECT_NAME}.elf ${PROJECT_NAME}.hex
+  TARGET ${EXECUTABLE} POST_BUILD COMMAND ${CMAKE_OBJCOPY} -O ihex ${OUTPUT_NAME_SIGNED}.elf ${OUTPUT_NAME_SIGNED}.hex
+)
+
+# Create hex with details in name
+add_custom_command(
+  TARGET ${EXECUTABLE} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${OUTPUT_NAME_SIGNED}.hex ${OUTPUT_NAME_DETAILED}.hex
 )
 
 # Clean Command --------------------------------------------------------------------------------------------------------
 
-# Clean bin, hex and map files (cmake deletes only the elf file by default)
+# Clean signed elf, hex and map files (cmake deletes only the output elf file by default)
 set_property(
   DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
   APPEND
-  PROPERTY ADDITIONAL_CLEAN_FILES ${PROJECT_NAME}.bin
+  PROPERTY ADDITIONAL_CLEAN_FILES ${PROJECT_NAME}.elf
+  PROPERTY ADDITIONAL_CLEAN_FILES ${OUTPUT_NAME_DETAILED}.elf
   PROPERTY ADDITIONAL_CLEAN_FILES ${PROJECT_NAME}.hex
+  PROPERTY ADDITIONAL_CLEAN_FILES ${OUTPUT_NAME_DETAILED}.hex
   PROPERTY ADDITIONAL_CLEAN_FILES ${PROJECT_NAME}.map
 )
 

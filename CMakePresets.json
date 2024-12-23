@@ -37,7 +37,7 @@
         {
             "name": "debug",
             "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Debug"
+                "CMAKE_BUILD_TYPE": "debug"
             },
             "inherits": [
                 "arm_base"
@@ -46,7 +46,7 @@
         {
             "name": "release",
             "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Release"
+                "CMAKE_BUILD_TYPE": "release"
             },
             "inherits": [
                 "arm_base"

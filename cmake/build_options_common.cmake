@@ -34,7 +34,7 @@ set(COMMON_COMPILE_OPTIONS
   -Wunused                      # Warn about unused variables, functions, or parameters
 
   # Preprocessor
-  $<$<CONFIG:Release>:-DNDEBUG> # Define symbol NDEBUG for release build
+  $<$<CONFIG:release>:-DNDEBUG> # Define symbol NDEBUG for release build
 
   # cmake-format: on
 )
