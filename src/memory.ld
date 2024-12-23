@@ -74,6 +74,8 @@ SECTIONS
     *(.text*)          /* .text* sections (code) */
     *(.glue_7)         /* glue arm to thumb code */
     *(.glue_7t)        /* glue thumb to arm code */
+    *(.init)           /* Mandatory section for functions executed before main entry */
+    *(.fini)           /* Mandatory section for functions executed after main return */
 
     . = ALIGN(4);
     _etext = .;        /* define a global symbols at end of code */
@@ -98,12 +100,9 @@ SECTIONS
     _sdata = .;        /* create a global symbol at data start */
     *(.data)           /* .data sections */
     *(.data*)          /* .data* sections */
-    *(.RamFunc)        /* .RamFunc sections */
-    *(.RamFunc*)       /* .RamFunc* sections */
 
     . = ALIGN(4);
     _edata = .;        /* define a global symbol at data end */
-
   } >RAM AT> FLASH =0xFF
 
   .version_flash_crc :

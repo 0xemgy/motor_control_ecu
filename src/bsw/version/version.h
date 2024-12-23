@@ -39,8 +39,8 @@ typedef enum version_build_type
  */
 typedef struct version_build_info
 {
-    util_timestamp_bcd_t         timestamp;          /**< Timestamp */
-    version_build_type_t         type;               /**< Build type */
+    util_timestamp_bcd_t timestamp; /**< Timestamp */
+    uint8_t              type;      /**< Build type */
 } version_build_info_t;
 
 /**
@@ -63,7 +63,8 @@ typedef struct version_info
     version_build_info_t build_info;                                 /**< Build information */
     version_git_info_t   git_info;                                   /**< Git information */
     uint32_t             code_size;                                  /**< [Byte] Code size */
-} __attribute__((packed)) version_info_t ;
+    uint32_t             info_crc;                                  /**< CRC over info section */
+} __attribute__((packed)) version_info_t;
 
 // Global Variables ----------------------------------------------------------------------------------------------------
 

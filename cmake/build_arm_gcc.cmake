@@ -12,7 +12,7 @@ set(CMAKE_EXECUTABLE_SUFFIX_C ".elf")
 add_executable(${EXECUTABLE} ${C_SOURCES} ${ASM_SOURCES})
 target_include_directories(${EXECUTABLE} PRIVATE ${INCLUDES})
 target_include_directories(${EXECUTABLE} SYSTEM PRIVATE ${SYSTEM_INCLUDES})
-set_target_properties(${EXECUTABLE} PROPERTIES OUTPUT_NAME ${PROJECT_NAME})
+set_target_properties(${EXECUTABLE} PROPERTIES OUTPUT_NAME ${PROJECT_NAME}_unsigned)
 
 # Compiler Options -----------------------------------------------------------------------------------------------------
 
@@ -81,7 +81,7 @@ target_link_options(
 # Post Build Commands---------------------------------------------------------------------------------------------------
 
 # Print executable size
-add_custom_command(TARGET ${EXECUTABLE} POST_BUILD COMMAND ${CMAKE_SIZE_UTIL} ${PROJECT_NAME}.elf)
+add_custom_command(TARGET ${EXECUTABLE} POST_BUILD COMMAND ${CMAKE_SIZE_UTIL} ${PROJECT_NAME}_unsigned.elf)
 
 # Create bin file
 add_custom_command(
