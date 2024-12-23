@@ -15,7 +15,7 @@ set(OUTPUT_NAME_DETAILED ${PROJECT_NAME}_v${PROJECT_VERSION}_${CMAKE_BUILD_TYPE}
 add_executable(${EXECUTABLE} ${C_SOURCES} ${ASM_SOURCES})
 target_include_directories(${EXECUTABLE} PRIVATE ${INCLUDES})
 target_include_directories(${EXECUTABLE} SYSTEM PRIVATE ${SYSTEM_INCLUDES})
-set_target_properties(${EXECUTABLE} PROPERTIES OUTPUT_NAME OUTPUT_NAME_UNSIGNED)
+set_target_properties(${EXECUTABLE} PROPERTIES OUTPUT_NAME ${OUTPUT_NAME_UNSIGNED})
 
 # Git ------------------------------------------------------------------------------------------------------------------
 
@@ -80,7 +80,7 @@ target_link_options(
   -T${CMAKE_CURRENT_SOURCE_DIR}/memory.ld                         # Specifies the linker script for memory layout
   -Wl,--gc-sections                                               # Enables garbage collection of unused sections
   -Wl,--print-memory-usage                                        # Prints memory usage information after linking
-  -Wl,-Map=${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.map,--cref # Generates a map file with cross-reference information
+  -Wl,-Map=${CMAKE_CURRENT_BINARY_DIR}/${OUTPUT_NAME_SIGNEd}.map,--cref # Generates a map file with cross-reference information
 
   # Standard Library
   --specs=nano.specs                                              # Use Newlib Nano
@@ -132,11 +132,12 @@ add_custom_command(
 set_property(
   DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
   APPEND
-  PROPERTY ADDITIONAL_CLEAN_FILES ${PROJECT_NAME}.elf
+  PROPERTY ADDITIONAL_CLEAN_FILES ${OUTPUT_NAME_UNSIGNED}.elf
+  PROPERTY ADDITIONAL_CLEAN_FILES ${OUTPUT_NAME_SIGNED}.elf
   PROPERTY ADDITIONAL_CLEAN_FILES ${OUTPUT_NAME_DETAILED}.elf
-  PROPERTY ADDITIONAL_CLEAN_FILES ${PROJECT_NAME}.hex
+  PROPERTY ADDITIONAL_CLEAN_FILES ${OUTPUT_NAME_SIGNED}.hex
   PROPERTY ADDITIONAL_CLEAN_FILES ${OUTPUT_NAME_DETAILED}.hex
-  PROPERTY ADDITIONAL_CLEAN_FILES ${PROJECT_NAME}.map
+  PROPERTY ADDITIONAL_CLEAN_FILES ${OUTPUT_NAME_SIGNED}.map
 )
 
 # Clean doxygen folder
