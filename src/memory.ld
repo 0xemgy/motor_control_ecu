@@ -57,14 +57,14 @@ SECTIONS
     . = ALIGN(4);
     KEEP(*(.isr_vector)) /* Startup code */
     . = ALIGN(4);
-  } >FLASH
+  } >FLASH =0xFF
 
   .version :
   {
-    . = ALIGN(8);
+    . = ALIGN(4);
     KEEP(*(.version))
-    . = ALIGN(8);
-  } >FLASH
+    . = ALIGN(4);
+  } >FLASH =0xFF
 
   /* The program code and other data into "FLASH" Rom type memory */
   .text :
@@ -77,7 +77,7 @@ SECTIONS
 
     . = ALIGN(4);
     _etext = .;        /* define a global symbols at end of code */
-  } >FLASH
+  } >FLASH =0xFF
 
   /* Constant data into "FLASH" Rom type memory */
   .rodata :
@@ -86,7 +86,7 @@ SECTIONS
     *(.rodata)         /* .rodata sections (constants, strings, etc.) */
     *(.rodata*)        /* .rodata* sections (constants, strings, etc.) */
     . = ALIGN(4);
-  } >FLASH
+  } >FLASH =0xFF
 
   /* Used by the startup to initialize data */
   _sidata = LOADADDR(.data);
@@ -104,7 +104,14 @@ SECTIONS
     . = ALIGN(4);
     _edata = .;        /* define a global symbol at data end */
 
-  } >RAM AT> FLASH
+  } >RAM AT> FLASH =0xFF
+
+  .flash_crc :
+  {
+    . = ALIGN(4);
+    KEEP(*(.flash_crc))
+    . = ALIGN(4);
+  } >FLASH =0xFF
 
   /* Uninitialized data section into "RAM" Ram type memory */
   . = ALIGN(4);
