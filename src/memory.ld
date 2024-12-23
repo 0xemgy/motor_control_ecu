@@ -59,10 +59,10 @@ SECTIONS
     . = ALIGN(4);
   } >FLASH =0xFF
 
-  .version :
+  .version_info :
   {
     . = ALIGN(4);
-    KEEP(*(.version))
+    KEEP(*(.version_info))
     . = ALIGN(4);
   } >FLASH =0xFF
 
@@ -106,10 +106,10 @@ SECTIONS
 
   } >RAM AT> FLASH =0xFF
 
-  .flash_crc :
+  .version_flash_crc :
   {
     . = ALIGN(4);
-    KEEP(*(.flash_crc))
+    KEEP(*(.version_flash_crc))
     . = ALIGN(4);
   } >FLASH =0xFF
 

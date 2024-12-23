@@ -136,7 +136,7 @@ int main(void)
 
     (void)ccc;
 
-    if ((val == MAGIC_NUMBER_1) && (version.sw_version.major == MAGIC_NUMBER_2))
+    if ((val == MAGIC_NUMBER_1) && (version_info.sw_version.major == MAGIC_NUMBER_2))
     {
         uint8_t val3 = MAGIC_NUMBER_1;
          (void)val3;

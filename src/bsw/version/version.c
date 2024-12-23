@@ -16,7 +16,8 @@
 // Local Variables -----------------------------------------------------------------------------------------------------
 // Global Variables ----------------------------------------------------------------------------------------------------
 
-const version_t version __attribute__((section(".version")));
+const version_info_t version_info __attribute__((section(".version_info")));
+const uint32_t version_flash_crc __attribute__((section(".version_flash_crc")));
 
 // Local Functions -----------------------------------------------------------------------------------------------------
 // Global Functions ----------------------------------------------------------------------------------------------------

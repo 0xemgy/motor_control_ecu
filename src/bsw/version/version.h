@@ -32,24 +32,7 @@ typedef enum version_build_type
     VERSION_BUILD_TYPE_RELEASE,
     VERSION_BUILD_TYPE_DEBUG,
     VERSION_BUILD_TYPE_MAX,
-    VERSION_BUILD_TYPE_UNKNOWN
 } version_build_type_t;
-
-/**
- * @brief Optimization level
- */
-typedef enum version_optimization_level
-{
-    VERSION_OPTIMIZATION_LEVEL_O0,
-    VERSION_OPTIMIZATION_LEVEL_O1,
-    VERSION_OPTIMIZATION_LEVEL_O2,
-    VERSION_OPTIMIZATION_LEVEL_O3,
-    VERSION_OPTIMIZATION_LEVEL_OFAST,
-    VERSION_OPTIMIZATION_LEVEL_OG,
-    VERSION_OPTIMIZATION_LEVEL_OS,
-    VERSION_OPTIMIZATION_LEVEL_OZ,
-    VERSION_OPTIMIZATION_LEVEL_MAX
-} version_optimization_level_t;
 
 /**
  * @brief Build information
@@ -58,7 +41,6 @@ typedef struct version_build_info
 {
     util_timestamp_bcd_t         timestamp;          /**< Timestamp */
     version_build_type_t         type;               /**< Build type */
-    version_optimization_level_t optimization_level; /**< Optimization level */
 } version_build_info_t;
 
 /**
@@ -73,17 +55,20 @@ typedef struct version_git_info
 /**
  * @brief Version information
  */
-typedef struct version
+typedef struct version_info
 {
+    uint32_t             magic_number;                               /**< Magic Number  */
     char                 project_name[VERSION_PROJECT_NAME_MAX_LEN]; /**< Project name */
     util_semver_bcd_t    sw_version;                                 /**< Software version */
     version_build_info_t build_info;                                 /**< Build information */
     version_git_info_t   git_info;                                   /**< Git information */
-} version_t;
+    uint32_t             code_size;                                  /**< [Byte] Code size */
+} __attribute__((packed)) version_info_t ;
 
 // Global Variables ----------------------------------------------------------------------------------------------------
 
-extern const version_t version; /**< Version */
+extern const version_info_t version_info;      /**< Version */
+extern const uint32_t       version_flash_crc; /**< CRC over whole data in flash  */
 
 // Global Functions ----------------------------------------------------------------------------------------------------
 
