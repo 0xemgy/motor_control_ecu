@@ -13,6 +13,8 @@ set(ASM_SOURCES
 
 set(C_SOURCES
     bsw/main.c
+    bsw/partition_info/partition_info.c
+    bsw/partition_info/partition_info.h
     bsw/util/util/util.c
     bsw/util/util/util.h
     bsw/util/util_debouncer/util_debouncer.c
@@ -26,13 +28,12 @@ set(C_SOURCES
     bsw/util/util_timeout/util_timeout.c
     bsw/util/util_timeout/util_timeout.h
     bsw/util/util_timestamp/util_timestamp.h
-    bsw/version/version.c
-    bsw/version/version.h
 )
 
 set(INCLUDES
     bsw
     bsw/config
+    bsw/partition_info
     bsw/util
     bsw/util/util
     bsw/util/util_debouncer
@@ -47,7 +48,6 @@ set(INCLUDES
     bsw/util/util_timestamp
     bsw/vendor
     bsw/vendor/cmsis
-    bsw/version
 )
 
 set(SYSTEM_INCLUDES

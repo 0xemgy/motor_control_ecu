@@ -59,10 +59,10 @@ SECTIONS
     . = ALIGN(4);
   } >FLASH =0xFF
 
-  .version_info :
+  .partition_info_header :
   {
     . = ALIGN(4);
-    KEEP(*(.version_info))
+    KEEP(*(.partition_info_header))
     . = ALIGN(4);
   } >FLASH =0xFF
 
@@ -105,10 +105,10 @@ SECTIONS
     _edata = .;        /* define a global symbol at data end */
   } >RAM AT> FLASH =0xFF
 
-  .version_flash_crc :
+  .partition_info_trailer :
   {
     . = ALIGN(4);
-    KEEP(*(.version_flash_crc))
+    KEEP(*(.partition_info_trailer))
     . = ALIGN(4);
   } >FLASH =0xFF
 

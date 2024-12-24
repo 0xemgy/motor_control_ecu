@@ -1,14 +1,14 @@
 /**
- * @file version.c
+ * @file partition_info.c
  * @author 0xemgy (0xemgy@gmail.com)
- * @brief See version.h
+ * @brief See partition_info.h
  *
  * @copyright Copyright (c) 2024 0xemgy
  */
 
 // Local Includes ------------------------------------------------------------------------------------------------------
 
-#include "version.h"
+#include "partition_info.h"
 
 // Local Defines -------------------------------------------------------------------------------------------------------
 // Local Function Prototypes -------------------------------------------------------------------------------------------
@@ -16,8 +16,8 @@
 // Local Variables -----------------------------------------------------------------------------------------------------
 // Global Variables ----------------------------------------------------------------------------------------------------
 
-const version_info_t version_info __attribute__((section(".version_info")));
-const uint32_t version_flash_crc __attribute__((section(".version_flash_crc")));
+const partition_info_header_t partition_info_header __attribute__((section(".partition_info_header")));
+const partition_info_trailer_t partition_info_trailer __attribute__((section(".partition_info_trailer")));
 
 // Local Functions -----------------------------------------------------------------------------------------------------
 // Global Functions ----------------------------------------------------------------------------------------------------
