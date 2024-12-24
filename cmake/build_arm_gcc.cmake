@@ -17,13 +17,6 @@ target_include_directories(${EXECUTABLE} PRIVATE ${INCLUDES})
 target_include_directories(${EXECUTABLE} SYSTEM PRIVATE ${SYSTEM_INCLUDES})
 set_target_properties(${EXECUTABLE} PROPERTIES OUTPUT_NAME ${OUTPUT_NAME_UNSIGNED})
 
-# Git ------------------------------------------------------------------------------------------------------------------
-
-find_package(Git)
-if(NOT GIT_FOUND)
-  message("Error: Git not found - necessary for Code Signer. Git must be in PATH")
-endif()
-
 # Compiler Options -----------------------------------------------------------------------------------------------------
 
 target_compile_options(
@@ -90,9 +83,6 @@ target_link_options(
 
 # Post Build Commands---------------------------------------------------------------------------------------------------
 
-# Print executable size
-add_custom_command(TARGET ${EXECUTABLE} POST_BUILD COMMAND ${CMAKE_SIZE_UTIL} ${OUTPUT_NAME_UNSIGNED}.elf)
-
 # Create signed elf file
 add_custom_command(
   TARGET ${EXECUTABLE}
@@ -100,7 +90,7 @@ add_custom_command(
   COMMAND ${CMAKE_COMMAND}
   -E env
     --modify PATH=set:"${TOOLS_PYTHON_PATH}"
-    --modify GIT_PYTHON_GIT_EXECUTABLE=set:"${GIT_EXECUTABLE}"
+    --modify GIT_PYTHON_GIT_EXECUTABLE=set:"${TOOLS_GIT}"
 
     python ${TOOLS_CODE_SIGNER}
       --elf_path ${CMAKE_CURRENT_BINARY_DIR}/${OUTPUT_NAME_UNSIGNED}.elf
@@ -110,6 +100,9 @@ add_custom_command(
 
   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 )
+
+# Print executable size
+add_custom_command(TARGET ${EXECUTABLE} POST_BUILD COMMAND ${CMAKE_SIZE_UTIL} ${OUTPUT_NAME_SIGNED}.elf)
 
 # Create elf with details in name
 add_custom_command(
