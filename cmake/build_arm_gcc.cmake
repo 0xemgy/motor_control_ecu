@@ -73,7 +73,7 @@ target_link_options(
   -T${CMAKE_CURRENT_SOURCE_DIR}/memory.ld                         # Specifies the linker script for memory layout
   -Wl,--gc-sections                                               # Enables garbage collection of unused sections
   -Wl,--print-memory-usage                                        # Prints memory usage information after linking
-  -Wl,-Map=${CMAKE_CURRENT_BINARY_DIR}/${OUTPUT_NAME_SIGNEd}.map,--cref # Generates a map file with cross-reference information
+  -Wl,-Map=${CMAKE_CURRENT_BINARY_DIR}/${OUTPUT_NAME_SIGNED}.map,--cref # Generates a map file with cross-reference information
 
   # Standard Library
   --specs=nano.specs                                              # Use Newlib Nano

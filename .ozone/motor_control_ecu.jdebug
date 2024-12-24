@@ -26,7 +26,7 @@ void OnProjectLoad (void) {
   Debug.SetResetMode (RM_RESET_AND_RUN);
   Project.AddPathSubstitute ("C:/work/repos/motor_control_ecu/.ozone", "$(ProjectDir)");
   Project.AddPathSubstitute ("c:/work/repos/motor_control_ecu/.ozone", "$(ProjectDir)");
-  Project.SetDevice ("STM32G474RE");
+  Project.SetDevice ("STM32G431CB");
   Project.SetHostIF ("USB", "");
   Project.SetTargetIF ("SWD");
   Project.SetTIFSpeed ("4 MHz");
@@ -34,7 +34,7 @@ void OnProjectLoad (void) {
   //
   // User settings
   //
-  Project.AddSvdFile ("./STM32G474.svd");
+  Project.AddSvdFile ("./STM32G431.svd");
   File.Open ("./../build/debug/src/motor_control_ecu_app.elf");
 }
 

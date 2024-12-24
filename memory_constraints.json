@@ -1,8 +1,8 @@
 {
     "regions":
     {
-        "RAM": 98304,
-        "FLASH": 393216
+        "RAM": 24576,
+        "FLASH": 98304
     },
     "stack" : 64
 }

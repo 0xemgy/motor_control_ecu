@@ -16,7 +16,7 @@
 // Local Variables -----------------------------------------------------------------------------------------------------
 // Global Variables ----------------------------------------------------------------------------------------------------
 
-const partition_info_header_t partition_info_header __attribute__((section(".partition_info_header")));
+const partition_info_header_t  partition_info_header __attribute__((section(".partition_info_header")));
 const partition_info_trailer_t partition_info_trailer __attribute__((section(".partition_info_trailer")));
 
 // Local Functions -----------------------------------------------------------------------------------------------------

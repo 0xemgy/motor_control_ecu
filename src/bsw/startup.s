@@ -1,8 +1,8 @@
 /**
   ******************************************************************************
-  * @file      startup_stm32g474xx.s
+  * @file      startup_stm32g431xx.s
   * @author    MCD Application Team
-  * @brief     STM32G474xx devices vector table GCC toolchain.
+  * @brief     STM32G431xx devices vector table GCC toolchain.
   *            This module performs:
   *                - Set the initial SP
   *                - Set the initial PC == Reset_Handler,

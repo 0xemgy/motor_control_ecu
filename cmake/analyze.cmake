@@ -215,9 +215,9 @@ add_custom_target(
       --suppress=unusedFunction:*util*      # The function 'function name' is never used
       --suppress=unusedStructMember:*util*  # struct member 'struct member name' is never used
 
-       # Suppressions for version
-       --suppress=unusedStructMember:*version*  # struct member 'struct member name' is never used
-       --suppress=misra-c2012-8.4:*version*     # A compatible declaration shall be visible when an object or function
+       # Suppressions for partition_info
+       --suppress=unusedStructMember:*partition_info* # struct member 'struct member name' is never used
+       --suppress=misra-c2012-8.4:*partition_info*    # A compatible declaration shall be visible when an object or function
                                                 # with external linkage is defined
 
       # Suppressions for entire code base

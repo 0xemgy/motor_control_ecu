@@ -24,11 +24,14 @@
 
 // Global Data Types ---------------------------------------------------------------------------------------------------
 
+/**
+ * @brief Partition info header info bits
+ */
 typedef struct partition_info_header_info_bits
 {
-    uint32_t is_release_build : 1;
-    uint32_t is_git_repo_dirty : 1;
-    uint32_t reserved : 6;
+    uint8_t is_release_build : 1;  /**< Is release build */
+    uint8_t is_git_repo_dirty : 1; /**< Is git repo dirty */
+    uint8_t reserved : 6;          /**< Reserved */
 } partition_info_header_info_bits_t;
 
 /**
@@ -58,8 +61,15 @@ typedef struct partition_info_trailer
 
 // Global Variables ----------------------------------------------------------------------------------------------------
 
-extern const partition_info_header_t  partition_info_header;  /**< Partition info header */
-extern const partition_info_trailer_t partition_info_trailer; /**< Partition info trailer  */
+/**
+ * @brief Partition info header
+ */
+extern const partition_info_header_t partition_info_header;
+
+/**
+ * @brief Partition info trailer
+ */
+extern const partition_info_trailer_t partition_info_trailer;
 
 // Global Functions ----------------------------------------------------------------------------------------------------
 
