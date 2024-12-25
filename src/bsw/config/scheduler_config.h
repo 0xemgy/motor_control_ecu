@@ -1,23 +1,28 @@
 /**
- * @file stdbool.h
+ * @file scheduler_config.h
  * @author 0xemgy (0xemgy@gmail.com)
- * @brief System header reduced to allowed types and defines
+ * @brief Scheduler
  *
  * @copyright Copyright (c) 2024 0xemgy
  */
 
-#ifndef STDBOOL_H
-#define STDBOOL_H
+#ifndef SCHEDULER_CONFIG_H
+#define SCHEDULER_CONFIG_H
 
 // Global Includes -----------------------------------------------------------------------------------------------------
 // Global Defines ------------------------------------------------------------------------------------------------------
-
-#define bool _Bool
-#define true	1
-#define false	0
-
 // Global Data Types ---------------------------------------------------------------------------------------------------
 // Global Variables ----------------------------------------------------------------------------------------------------
 // Global Functions ----------------------------------------------------------------------------------------------------
+
+/**
+ * @brief Initialize module
+ */
+void scheduler_config_init(void);
+
+/**
+ * @brief Execute module logic in idle context
+ */
+void scheduler_config_run_idle(void);
 
 #endif

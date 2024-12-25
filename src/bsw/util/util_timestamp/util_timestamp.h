@@ -41,7 +41,7 @@ typedef struct util_timestamp
     uint8_t  hour;   /**< Hour [0...23] */
     uint8_t  minute; /**< Minute [0...59] */
     uint8_t  second; /**< Second [0...59]*/
-} util_timestamp_t;
+} __attribute__((packed)) util_timestamp_t;
 
 /**
  * @brief Data in binary coded data format

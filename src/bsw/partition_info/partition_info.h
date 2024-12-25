@@ -39,13 +39,13 @@ typedef struct partition_info_header_info_bits
  */
 typedef struct partition_info_header
 {
-    uint32_t                          magic_number;                                      /**< Magic Number */
     char                              project_name[PARTITION_INFO_PROJECT_NAME_MAX_LEN]; /**< Project name */
     util_semver_t                     sw_version;                                        /**< Software version */
     char                              short_sha[PARTITION_INFO_GIT_INFO_SHORT_SHA_LEN];  /**< Git short SHA */
     partition_info_header_info_bits_t info_bits;                                         /**< Info bits */
-    uint32_t                          code_size;                                         /**< [Byte] Code size */
-    uint32_t                          header_crc;                                        /**< CRC over header */
+    uint32_t                          start_address; /**< [Byte] Code start address */
+    uint32_t                          code_size;     /**< [Byte] Code size (without trailer) */
+    uint32_t                          header_crc;    /**< CRC over header */
 } __attribute__((packed)) partition_info_header_t;
 
 /**
@@ -53,10 +53,9 @@ typedef struct partition_info_header
  */
 typedef struct partition_info_trailer
 {
-    uint32_t         magic_number; /**< Magic Number  */
-    uint32_t         code_crc;     /**< CRC over whole code */
-    util_timestamp_t timestamp;    /**< Build timestamp */
-    uint32_t         trailer_crc;  /**< CRC over trailer */
+    uint32_t         code_crc;    /**< CRC over whole code */
+    util_timestamp_t timestamp;   /**< Build timestamp */
+    uint32_t         trailer_crc; /**< CRC over trailer */
 } __attribute__((packed)) partition_info_trailer_t;
 
 // Global Variables ----------------------------------------------------------------------------------------------------

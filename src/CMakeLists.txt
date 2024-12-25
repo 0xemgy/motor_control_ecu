@@ -13,8 +13,16 @@ set(ASM_SOURCES
 
 set(C_SOURCES
     bsw/main.c
+    bsw/config/crc_config.c
+    bsw/config/crc_config.h
+    bsw/config/scheduler_config.c
+    bsw/config/scheduler_config.h
+    bsw/crc/crc.c
+    bsw/crc/crc.h
     bsw/partition_info/partition_info.c
     bsw/partition_info/partition_info.h
+    bsw/scheduler/scheduler.c
+    bsw/scheduler/scheduler.h
     bsw/util/util/util.c
     bsw/util/util/util.h
     bsw/util/util_debouncer/util_debouncer.c
@@ -33,6 +41,7 @@ set(C_SOURCES
 set(INCLUDES
     bsw
     bsw/config
+    bsw/crc
     bsw/partition_info
     bsw/util
     bsw/util/util

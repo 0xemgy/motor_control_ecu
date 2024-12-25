@@ -1,20 +1,18 @@
 /**
- * @file stdbool.h
+ * @file stddef.h
  * @author 0xemgy (0xemgy@gmail.com)
  * @brief System header reduced to allowed types and defines
  *
  * @copyright Copyright (c) 2024 0xemgy
  */
 
-#ifndef STDBOOL_H
-#define STDBOOL_H
+#ifndef STDDEF_H
+#define STDDEF_H
 
 // Global Includes -----------------------------------------------------------------------------------------------------
 // Global Defines ------------------------------------------------------------------------------------------------------
 
-#define bool _Bool
-#define true	1
-#define false	0
+#define NULL ((void *)0)
 
 // Global Data Types ---------------------------------------------------------------------------------------------------
 // Global Variables ----------------------------------------------------------------------------------------------------
