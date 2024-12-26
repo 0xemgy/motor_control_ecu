@@ -12,19 +12,15 @@ set(ASM_SOURCES
 )
 
 set(C_SOURCES
-    bsw/main.c
     bsw/config/crc_config.c
     bsw/config/crc_config.h
     bsw/config/scheduler_config.c
     bsw/config/scheduler_config.h
     bsw/crc/crc.c
     bsw/crc/crc.h
+    bsw/main.c
     bsw/partition_info/partition_info.c
     bsw/partition_info/partition_info.h
-    bsw/scheduler/scheduler.c
-    bsw/scheduler/scheduler.h
-    bsw/util/util/util.c
-    bsw/util/util/util.h
     bsw/util/util_debouncer/util_debouncer.c
     bsw/util/util_debouncer/util_debouncer.h
     bsw/util/util_getter/util_getter.h
@@ -36,6 +32,8 @@ set(C_SOURCES
     bsw/util/util_timeout/util_timeout.c
     bsw/util/util_timeout/util_timeout.h
     bsw/util/util_timestamp/util_timestamp.h
+    bsw/util/util/util.c
+    bsw/util/util/util.h
 )
 
 set(INCLUDES
@@ -45,12 +43,12 @@ set(INCLUDES
     bsw/partition_info
     bsw/util
     bsw/util/util
+    bsw/util/util_averager
     bsw/util/util_debouncer
     bsw/util/util_estimator
     bsw/util/util_getter
     bsw/util/util_memcpy
     bsw/util/util_memset
-    bsw/util/util_averager
     bsw/util/util_scaler
     bsw/util/util_semver
     bsw/util/util_timeout

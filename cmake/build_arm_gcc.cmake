@@ -133,6 +133,13 @@ set_property(
   PROPERTY ADDITIONAL_CLEAN_FILES ${OUTPUT_NAME_SIGNED}.map
 )
 
+# Clean cppcheck folder
+set_property(
+  DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+  APPEND
+  PROPERTY ADDITIONAL_CLEAN_FILES cppcheck
+)
+
 # Clean doxygen folder
 set_property(
   DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}

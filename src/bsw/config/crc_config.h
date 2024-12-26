@@ -42,5 +42,4 @@ void crc_config_init(void);
  */
 uint32_t crc_config_calculate(uint32_t handle, const void *data, uint32_t len);
 
-
 #endif

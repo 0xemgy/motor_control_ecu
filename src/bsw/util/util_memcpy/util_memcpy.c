@@ -20,8 +20,8 @@
 
 void util_memcpy(void *dst, const void *src, uint32_t len)
 {
-    uint8_t       *dst0 = (uint8_t *)dst;       // cppcheck-suppress [misra-c2012-11.5]
-    const uint8_t *src0 = (const uint8_t *)src; // cppcheck-suppress [misra-c2012-11.5]
+    uint8_t       *dst0 = dst;
+    const uint8_t *src0 = src;
 
     for (uint32_t i = (uint32_t)0; i < len; i++)
     {

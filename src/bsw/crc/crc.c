@@ -53,9 +53,11 @@ uint32_t crc_calculate(crc_t *me, const void *data, uint32_t len)
                (((uint32_t)me->config->poly_size) << CRC_CR_POLYSIZE_Pos));
     CRC->CR |= CRC_CR_RESET;
 
+    const uint8_t *data0 = data;
+
     for (uint32_t i = (uint32_t)0; i < len; i++)
     {
-        *(__IO uint8_t *)&CRC->DR = ((const uint8_t *)data)[i];
+        *(__IO uint8_t *)&CRC->DR = data0[i];
     }
 
     me->result = CRC->DR ^ me->config->xor_out;

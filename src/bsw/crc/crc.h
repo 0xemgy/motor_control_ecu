@@ -27,7 +27,7 @@ typedef enum crc_poly_size
 } crc_poly_size_t;
 
 /// Module configuration data
-typedef struct
+typedef struct crc_config
 {
     crc_poly_size_t poly_size; ///< Polynomial size
     uint32_t        poly;      ///< Polynomial
@@ -39,7 +39,7 @@ typedef struct
 } crc_config_t;
 
 /// Module instance data
-typedef struct
+typedef struct crc
 {
     const crc_config_t *config; ///< Configuration data
     uint32_t            result; ///< Result

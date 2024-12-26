@@ -20,7 +20,7 @@
 
 void util_memset(void *dst, uint8_t val, uint32_t len)
 {
-    uint8_t *dst0 = (uint8_t *)dst; // cppcheck-suppress [misra-c2012-11.5]
+    uint8_t *dst0 = dst;
 
     for (uint32_t i = (uint32_t)0; i < len; i++)
     {

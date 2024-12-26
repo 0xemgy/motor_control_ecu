@@ -43,9 +43,9 @@ typedef struct partition_info_header
     util_semver_t                     sw_version;                                        /**< Software version */
     char                              short_sha[PARTITION_INFO_GIT_INFO_SHORT_SHA_LEN];  /**< Git short SHA */
     partition_info_header_info_bits_t info_bits;                                         /**< Info bits */
-    uint32_t                          start_address; /**< [Byte] Code start address */
-    uint32_t                          code_size;     /**< [Byte] Code size (without trailer) */
-    uint32_t                          header_crc;    /**< CRC over header */
+    uint32_t                         *start_address;                                     /**< Code start address */
+    uint32_t                          code_size;  /**< [Byte] Code size (without trailer) */
+    uint32_t                          header_crc; /**< CRC over header */
 } __attribute__((packed)) partition_info_header_t;
 
 /**
@@ -60,6 +60,7 @@ typedef struct partition_info_trailer
 
 // Global Variables ----------------------------------------------------------------------------------------------------
 
+// cppcheck-suppress-begin misra-c2012-8.4
 /**
  * @brief Partition info header
  */
@@ -69,6 +70,7 @@ extern const partition_info_header_t partition_info_header;
  * @brief Partition info trailer
  */
 extern const partition_info_trailer_t partition_info_trailer;
+// cppcheck-suppress-end misra-c2012-8.4
 
 // Global Functions ----------------------------------------------------------------------------------------------------
 

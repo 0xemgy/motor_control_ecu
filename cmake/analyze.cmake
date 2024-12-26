@@ -73,7 +73,7 @@ add_custom_target(
     --out=${CMAKE_CURRENT_BINARY_DIR}/loc_report.json
     --quiet
 
-  COMMENT "Running formatting analysis"
+  COMMENT "Running loc analysis"
 )
 
 # iwyu -----------------------------------------------------------------------------------------------------------------
@@ -184,9 +184,14 @@ add_custom_target(
 
 # static_code_2 --------------------------------------------------------------------------------------------------------
 
+set(CPPCHECK_BUILD_PATH ${CMAKE_CURRENT_BINARY_DIR}/cppcheck)
+
 add_custom_target(
   analyze_static_code_2
-  ${CMAKE_COMMAND}
+  COMMAND ${CMAKE_COMMAND}
+    -E make_directory ${CPPCHECK_BUILD_PATH}
+
+  COMMAND ${CMAKE_COMMAND}
     -E env
       --modify PATH=set:"${TOOLS_PYTHON_PATH}"
       --modify PYTHONPATH=set:"${TOOLS_CPPCHECK_PATH}/addons"
@@ -203,27 +208,29 @@ add_custom_target(
       --template=gcc            # Use GCC template for reporting
       --error-exitcode=1        # Fail if any issues are found
 
+      --cppcheck-build-dir=${CPPCHECK_BUILD_PATH} # Build folder to save analyzer information (speeds up analysis)
+
       --suppress=checkersReport # Active checkers: x/y (use --checkers-report=<filename> to see details)
 
       # Suppressions for utility code
       --suppress=misra-c2012-19.2:*util*    # The union keyword should not be used
-      --suppress=misra-c2012-2.3:*util*     # A project should not contain unused type declarations
-      --suppress=misra-c2012-2.4:*util*     # A project should not contain unused tag declarations
-      --suppress=misra-c2012-2.5:*util*     # A project should not contain unused macro declarations
-      --suppress=misra-c2012-8.7:*util*     # Functions and objects should not be defined with external linkage if they
-                                            # are referenced in only one translation unit
-      --suppress=unusedFunction:*util*      # The function 'function name' is never used
-      --suppress=unusedStructMember:*util*  # struct member 'struct member name' is never used
-
-       # Suppressions for partition_info
-       --suppress=unusedStructMember:*partition_info* # struct member 'struct member name' is never used
-       --suppress=misra-c2012-8.4:*partition_info*    # A compatible declaration shall be visible when an object or function
-                                                # with external linkage is defined
 
       # Suppressions for entire code base
       --suppress=missingIncludeSystem     # Avoid false positives on <stdbool.h> and <stdint.h> includes
-      --suppress=misra-c2012-8.9:*        # An object should be defined at block scope if its identifier only appears in
-                                          # a single function
+      --suppress=toomanyconfigs           # Too many #ifdef configurations
+      --suppress=unmatchedSuppression:*   #  Unmatched suppression
+      --suppress=unusedFunction:*         # The function 'function name' is never used
+      --suppress=unusedStructMember:*     # struct member 'struct member name' is never used
+      --suppress=misra-c2012-2.3:*        # A project should not contain unused type declarations
+      --suppress=misra-c2012-2.4:*        # A project should not contain unused tag declarations
+      --suppress=misra-c2012-2.5:*        # A project should not contain unused macro declarations
+      --suppress=misra-c2012-8.7:*        # Functions and objects should not be defined with external linkage if they are referenced in only one translation unit
+      --suppress=misra-c2012-8.9:*        # An object should be defined at block scope if its identifier only appears in a single function
+      --suppress=misra-c2012-11.4:*       # A conversion should not be performed between a pointer to object and an integer type
+      --suppress=misra-c2012-11.5:*       # A conversion should not be performed from pointer to void into pointer to object
+
+      # Suppressions for vendor code
+      --suppress=*:*/vendor/cmsis/*
 
       # Include paths and source files
       ${ABSOLUTE_INCLUDES}
