@@ -207,6 +207,8 @@ add_custom_target(
       --inline-suppr            # Enable inline suppressions
       --template=gcc            # Use GCC template for reporting
       --error-exitcode=1        # Fail if any issues are found
+      --quiet                   # Only print something when there is an error
+      --max-configs=1           # Maximum number of configurations to check in a file before skipping it
 
       --cppcheck-build-dir=${CPPCHECK_BUILD_PATH} # Build folder to save analyzer information (speeds up analysis)
 

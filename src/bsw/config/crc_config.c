@@ -27,7 +27,7 @@
 static const crc_config_t crc_config_configs[CRC_CONFIG_HANDLE_MAX] = {
     [CRC_CONFIG_HANDLE_CRC32_ZLIB] = {
     .poly_size = CRC_POLY_SIZE_32,
-    .poly      = 0x04C11DB7u,
+    .poly      = 0x04C11DB7,
     .init      = 0xFFFFFFFFu,
     .ref_in    = true,
     .ref_out   = true,
@@ -49,7 +49,7 @@ void crc_config_init(void)
 {
     RCC->AHB1ENR = RCC_AHB1ENR_CRCEN;
 
-    for (uint32_t i = 0u; i < (uint32_t)CRC_CONFIG_HANDLE_MAX; i++)
+    for (uint32_t i = 0; i < (uint32_t)CRC_CONFIG_HANDLE_MAX; i++)
     {
         crc_init(&crc_config_crcs[i], &crc_config_configs[i]);
     }
