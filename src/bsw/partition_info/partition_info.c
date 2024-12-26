@@ -16,10 +16,8 @@
 // Local Variables -----------------------------------------------------------------------------------------------------
 // Global Variables ----------------------------------------------------------------------------------------------------
 
-// cppcheck-suppress-begin misra-c2012-8.4
 __attribute__((section(".partition_info_header"))) const partition_info_header_t   partition_info_header;
 __attribute__((section(".partition_info_trailer"))) const partition_info_trailer_t partition_info_trailer;
-// cppcheck-suppress-end misra-c2012-8.4
 
 // Local Functions -----------------------------------------------------------------------------------------------------
 // Global Functions ----------------------------------------------------------------------------------------------------

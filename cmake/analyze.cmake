@@ -218,7 +218,7 @@ add_custom_target(
       # Suppressions for entire code base
       --suppress=missingIncludeSystem     # Avoid false positives on <stdbool.h> and <stdint.h> includes
       --suppress=toomanyconfigs           # Too many #ifdef configurations
-      --suppress=unmatchedSuppression:*   #  Unmatched suppression
+      --suppress=unmatchedSuppression:*   # Unmatched suppression
       --suppress=unusedFunction:*         # The function 'function name' is never used
       --suppress=unusedStructMember:*     # struct member 'struct member name' is never used
       --suppress=misra-c2012-2.3:*        # A project should not contain unused type declarations

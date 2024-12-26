@@ -60,7 +60,6 @@ typedef struct partition_info_trailer
 
 // Global Variables ----------------------------------------------------------------------------------------------------
 
-// cppcheck-suppress-begin misra-c2012-8.4
 /**
  * @brief Partition info header
  */
@@ -70,7 +69,6 @@ extern const partition_info_header_t partition_info_header;
  * @brief Partition info trailer
  */
 extern const partition_info_trailer_t partition_info_trailer;
-// cppcheck-suppress-end misra-c2012-8.4
 
 // Global Functions ----------------------------------------------------------------------------------------------------
 
