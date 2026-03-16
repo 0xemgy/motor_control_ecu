@@ -1,3 +1,24 @@
 /.ozone/*.jdebug.user
 /build
-/tools
+
+# packsy start (auto-generated, do not edit)
+src/bsw/util/util
+tools/arm_gnu_toolchain
+tools/c_naming_checker
+tools/clang_format
+tools/clang_tidy
+tools/cloc
+tools/cmake
+tools/cmake_format
+tools/code_signer
+tools/cppcheck
+tools/doxygen
+tools/git
+tools/graphviz
+tools/html_report_generator
+tools/libclang
+tools/memory_usage_analyzer
+tools/mingw
+tools/ninja
+tools/python
+# packsy end (auto-generated, do not edit)

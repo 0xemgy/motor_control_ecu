@@ -1,0 +1,21 @@
+[packages]
+"src/bsw/util/util"            = { url = "git@github.com:0xemgy/util.git"                      , ref = "v0.0.1"                                        , symlink = false}
+"tools/c_naming_checker"       = { url = "https://github.com/0xemgy/c_naming_checker.git"      , ref = "main"                                          , symlink = true}
+"tools/clang_format"           = { url = "https://github.com/0xemgy/clang-format.git"          , ref = "main"                                          , symlink = true}
+"tools/python"                 = { url = "https://github.com/0xemgy/python.git"                , ref = "main"                                          , symlink = true}
+"tools/clang_tidy"             = { url = "https://github.com/0xemgy/clang-tidy.git"            , ref = "main"                                          , symlink = true}
+"tools/cloc"                   = { url = "https://github.com/0xemgy/cloc.git"                  , ref = "v2.02"                                         , symlink = true}
+"tools/cmake_format"           = { url = "https://github.com/0xemgy/cmake-format.git"          , ref = "main"                                          , symlink = true}
+"tools/cmake"                  = { url = "https://github.com/0xemgy/cmake.git"                 , ref = "main"                                          , symlink = true}
+"tools/code_signer"            = { url = "https://github.com/0xemgy/code_signer.git"           , ref = "main"                                          , symlink = true}
+"tools/cppcheck"               = { url = "https://github.com/0xemgy/cppcheck.git"              , ref = "main"                                          , symlink = true}
+"tools/doxygen"                = { url = "https://github.com/0xemgy/doxygen.git"               , ref = "main"                                          , symlink = true}
+"tools/git"                    = { url = "https://github.com/0xemgy/git.git"                   , ref = "main"                                          , symlink = true}
+"tools/graphviz"               = { url = "https://github.com/0xemgy/graphviz.git"              , ref = "main"                                          , symlink = true}
+"tools/html_report_generator"  = { url = "https://github.com/0xemgy/html_report_generator.git" , ref = "main"                                          , symlink = true}
+"tools/libclang"               = { url = "https://github.com/0xemgy/libclang.git"              , ref = "main"                                          , symlink = true}
+"tools/memory_usage_analyzer"  = { url = "https://github.com/0xemgy/memory_usage_analyzer.git" , ref = "main"                                          , symlink = true}
+"tools/ninja"                  = { url = "https://github.com/0xemgy/ninja.git"                 , ref = "main"                                          , symlink = true}
+"tools/mingw"                  = { url = "https://github.com/0xemgy/mingw.git"                 , ref = "main"                                          , symlink = true}
+"tools/arm_gnu_toolchain"      = { url = "https://github.com/0xemgy/arm_gnu_toolchain.git"     , ref = "12.2.mpacbti-rel1-mingw-w64-i686-arm-none-eabi", symlink = true}
+
