@@ -41,6 +41,11 @@ add_custom_target(
 
 add_dependencies(test_coverage test_run_all)
 
+# Unit Test Libraries --------------------------------------------------------------------------------------------------
+
+add_subdirectory(vendor/fff)
+add_subdirectory(vendor/unity)
+
 # Add unit test function -----------------------------------------------------------------------------------------------
 
 function(add_unit_test UNIT_NAME UNIT_DIR)
@@ -53,21 +58,26 @@ function(add_unit_test UNIT_NAME UNIT_DIR)
       ${TEST_EXECUTABLE}/${TEST_EXECUTABLE}.c
       ${UNIT_DIR}/${UNIT_NAME}.c
       ${OPTIONAL_ARG_ADDITIONAL_C_SOURCES}
-      vendor/unity/unity.c
   )
 
   set(INCLUDES
       ${UNIT_DIR}
       ${OPTIONAL_ARG_ADDITIONAL_INCLUDES}
-      vendor/fff
-      vendor/unity
   )
 
   include(${CMAKE_SOURCE_DIR}/cmake/build_mingw.cmake)
 
+  target_link_libraries(
+      ${TEST_EXECUTABLE}
+      PRIVATE
+      unity
+      fff
+  )
+
   add_test(
     ${TEST_EXECUTABLE}
-    ${TEST_EXECUTABLE})
+    ${TEST_EXECUTABLE}
+  )
 
   add_dependencies(test_build_all ${TEST_EXECUTABLE})
 
