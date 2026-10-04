@@ -24,6 +24,9 @@ add_dependencies(test_run_all test_build_all)
 
 # Coverage target ------------------------------------------------------------------------------------------------------
 
+set(COVERAGE_DIR ${CMAKE_CURRENT_BINARY_DIR}/coverage)
+add_custom_target(coverage_make_dir COMMAND ${CMAKE_COMMAND} -E make_directory ${COVERAGE_DIR})
+
 add_custom_target(
   test_coverage
   ${CMAKE_COMMAND}
@@ -33,8 +36,14 @@ add_custom_target(
   python -m gcovr
   --root .
   --gcov-executable ${CMAKE_GCOV}
-  --html-details ${CMAKE_CURRENT_BINARY_DIR}/coverage.html
-  -f src/*
+  --html-details ${COVERAGE_DIR}/coverage.html
+  --jacoco ${COVERAGE_DIR}/coverage.xml
+  --json-add-tracefile "${COVERAGE_DIR}/coverage_*.json"
+  --object-directory="${COVERAGE_DIR}"
+  --fail-under-line 100
+  --fail-under-branch 100
+  --decisions
+  --calls
 
   WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
 )
@@ -53,6 +62,8 @@ function(add_unit_test UNIT_NAME UNIT_DIR)
   cmake_parse_arguments("OPTIONAL_ARG" "" "" "${multiValueArgs}" ${ARGN})
 
   set(TEST_EXECUTABLE test_${UNIT_NAME})
+  set(COVERAGE_FILE ${COVERAGE_DIR}/coverage_${UNIT_NAME}.json)
+  set(COVERAGE_DIR ${COVERAGE_DIR}/coverage/${UNIT_NAME})
 
   set(C_SOURCES
       ${TEST_EXECUTABLE}/${TEST_EXECUTABLE}.c
@@ -80,5 +91,28 @@ function(add_unit_test UNIT_NAME UNIT_DIR)
   )
 
   add_dependencies(test_build_all ${TEST_EXECUTABLE})
+
+  # Per-unit coverage -----------------------------------------------------------------------------------------------
+
+  file(RELATIVE_PATH UNIT_DIR_RELATIVE ${CMAKE_SOURCE_DIR} ${UNIT_DIR})
+
+  add_custom_target(
+    coverage_${UNIT_NAME}
+    COMMAND
+    ${CMAKE_COMMAND}
+    -E env
+      --modify PATH=set:"${TOOLS_PYTHON_PATH}"
+
+    python -m gcovr
+    --root .
+    --gcov-executable ${CMAKE_GCOV}
+    --json ${COVERAGE_FILE}
+    --filter "${UNIT_DIR}/${UNIT_NAME}.c"
+    "${CMAKE_BINARY_DIR}/tests/CMakeFiles/${TEST_EXECUTABLE}.dir/__/${UNIT_DIR_RELATIVE}/"
+
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+  )
+
+  add_dependencies(test_coverage coverage_${UNIT_NAME} coverage_make_dir)
 
 endfunction()
